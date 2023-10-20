@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 
-function Hexagon() {
+const Hexagon = ({color}) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -11,7 +11,7 @@ function Hexagon() {
     // Set the center and radius of the hexagon
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
-    const radius =97.5;
+    const radius = 97.5;
 
     // Calculate the coordinates of the six points of the hexagon
     const xPoints = [];
@@ -27,10 +27,10 @@ function Hexagon() {
     for (let i = 1; i < 6; i++) {
       ctx.lineTo(xPoints[i], yPoints[i]);
     }
-    ctx.closePath(); 
-    ctx.strokeStyle = "red";
+    ctx.closePath();
+    ctx.strokeStyle = 'white';
     ctx.lineWidth = 5;
-    ctx.fillStyle = "white";
+    ctx.fillStyle = color;
     ctx.stroke();
     ctx.fill();
   }, []);

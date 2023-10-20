@@ -8,19 +8,22 @@ import Row5 from './BoardRows/Row5';
 import Row6 from './BoardRows/Row6';
 
 const Board = () => {
+  const earthTones = ['#949C73', '#E0BC6E', '#FFA177'];
+  const funkyMoss = ['#44634D', '#EC5082', '#1B3E31'];
+  const currentPalette = funkyMoss;
   return (
     <Container>
-      <Row1 translatex={131}/>
-      <Row2 translatex={105}/>
-      <Row3 translatex={79}/>
-      <Row4 translatex={53}/>
-      <Row5 translatex={26.3}/>
-      <Row6 />
-      <Row5 translatex={-26.3}/>
-      <Row4 translatex={-53}/>
-      <Row3 translatex={-79}/>
-      <Row2 translatex={-105}/>
-      <Row1 translatex={-131}/>
+      <Row1 translatex={131}  colorPalette={currentPalette}/>
+      <Row2 translatex={105}  colorPalette={currentPalette}/>
+      <Row3 translatex={79}   colorPalette={currentPalette}/>
+      <Row4 translatex={53}   colorPalette={currentPalette}/>
+      <Row5 translatex={26.3} colorPalette={currentPalette}/>
+      <Row6 colorPalette={currentPalette}/>
+      <Row5 translatex={-26.3} colorPalette={currentPalette}/>
+      <Row4 translatex={-53}   colorPalette={currentPalette}/>
+      <Row3 translatex={-79}   colorPalette={currentPalette}/>
+      <Row2 translatex={-105}  colorPalette={currentPalette}/>
+      <Row1 translatex={-131}  colorPalette={currentPalette}/>
     </Container>
   );
 };
@@ -29,9 +32,9 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   width: 900px;
-  
   padding: 10px;
   border: 1px solid red;
+  background-color: white;
 `;
 
 export default Board;
