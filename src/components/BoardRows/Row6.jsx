@@ -4,13 +4,13 @@ import Hexagon from '../Hexagon';
 
 const Row6 = ({ colorPalette }) => {
   function renderElements(count) {
-    let color
+    let color;
     const elements = [];
     for (let i = 0; i < count; i++) {
       const colorIndex = (i + 2) % colorPalette.length;
       color = colorPalette[colorIndex];
-      console.log(color)
-      elements.push(<Hexagon key={`${i}`} color={color} />)}
+      elements.push(<Hexagon key={`${i}`} color={color} />)
+    };
     return elements;
   };
 

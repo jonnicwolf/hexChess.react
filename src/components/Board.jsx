@@ -10,6 +10,8 @@ import Row6 from './BoardRows/Row6';
 const Board = () => {
   const earthTones = ['#949C73', '#E0BC6E', '#FFA177'];
   const funkyMoss = ['#44634D', '#EC5082', '#1B3E31'];
+  const kungFu = ['navajowhite', 'dimgrey', 'red'];
+
   const currentPalette = funkyMoss;
   return (
     <Container>
@@ -29,12 +31,12 @@ const Board = () => {
 };
 
 const Container = styled.div`
+  background-color: white;
+  border: 1px solid red;
   display: flex;
   justify-content: center;
-  width: 900px;
   padding: 10px;
-  border: 1px solid red;
-  background-color: white;
+  width: 900px;
 `;
 
 export default Board;
