@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 const Hexagon = ({color, cellID}) => {
   const [isTouched, setTouch] = useState(false);
-  console.log('isTouched', isTouched);
   const canvasRef = useRef(null);
 
   useEffect(() => {

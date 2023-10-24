@@ -8,12 +8,14 @@ import Row5 from './BoardRows/Row5';
 import Row6 from './BoardRows/Row6';
 
 const Board = () => {
-  const earthTones = ['#949C73', '#E0BC6E', '#FFA177'];
-  const funkyMoss = ['#44634D', '#EC5082', '#1B3E31'];
-  const kungFu = ['navajowhite', 'dimgrey', 'red'];
-  const classic = ['black', 'grey', 'white'];
+  const earthTones = ['#FFA177','#E0BC6E','#949C73'];
+  const funkyMoss = ['#44634D','#EC5082','#1B3E31'];
+  const kungFu = ['red', 'dimgrey', 'navajowhite'];
+  const leanne = ['#fc03be', '#fc8c03', 'purple'];
+  const classic = ['white', 'grey', 'black'];
+  const smileOrange = ['#fc8e08','#9fa19f','#8a5413']
 
-  const currentPalette = classic;
+  const currentPalette = smileOrange;
 
   return (
     <Container>
