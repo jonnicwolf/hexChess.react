@@ -9,7 +9,7 @@ const Row6 = ({ colorPalette }) => {
     for (let i = 0; i < count; i++) {
       const colorIndex = (i + 2) % colorPalette.length;
       color = colorPalette[colorIndex];
-      elements.push(<Hexagon key={`${i}`} color={color} />)
+      elements.push(<Hexagon key={`${i}`} color={color} cellId={i}/>)
     };
     return elements;
   };

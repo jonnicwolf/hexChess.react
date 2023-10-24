@@ -1,7 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
-const Hexagon = ({color}) => {
+const Hexagon = ({color, cellID}) => {
+  const [isTouched, setTouch] = useState(false);
+  console.log('isTouched', isTouched);
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -24,18 +26,23 @@ const Hexagon = ({color}) => {
     // Start drawing the hexagon
     ctx.beginPath();
     ctx.moveTo(xPoints[0], yPoints[0]);
-    for (let i = 1; i < 6; i++) {
-      ctx.lineTo(xPoints[i], yPoints[i]);
-    }
+    for (let i = 1; i < 6; i++) { ctx.lineTo(xPoints[i], yPoints[i]) };
     ctx.closePath();
-    ctx.strokeStyle = 'white';
+    ctx.strokeStyle = 'black';
     ctx.lineWidth = 5;
-    ctx.fillStyle = color;
+    ctx.fillStyle = isTouched ? '#fae57f' : color;
     ctx.stroke();
     ctx.fill();
-  }, []);
+  }, [isTouched]);
 
-  return <HexagonCanvas ref={canvasRef} id="hexagon" width={200} height={172} />;
+  return (
+    <HexagonCanvas
+      ref={canvasRef}
+      id="hexagon"
+      width={200}
+      height={172}
+      onClick={()=> setTouch(!isTouched)} />
+  );
 };
 
 const HexagonCanvas = styled.canvas`

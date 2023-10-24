@@ -11,16 +11,18 @@ const Board = () => {
   const earthTones = ['#949C73', '#E0BC6E', '#FFA177'];
   const funkyMoss = ['#44634D', '#EC5082', '#1B3E31'];
   const kungFu = ['navajowhite', 'dimgrey', 'red'];
+  const classic = ['black', 'grey', 'white'];
 
-  const currentPalette = funkyMoss;
+  const currentPalette = classic;
+
   return (
     <Container>
-      <Row1 translatex={131}  colorPalette={currentPalette}/>
-      <Row2 translatex={105}  colorPalette={currentPalette}/>
-      <Row3 translatex={79}   colorPalette={currentPalette}/>
-      <Row4 translatex={53}   colorPalette={currentPalette}/>
-      <Row5 translatex={26.3} colorPalette={currentPalette}/>
-      <Row6 colorPalette={currentPalette}/>
+      <Row1 translatex={131}   colorPalette={currentPalette}/>
+      <Row2 translatex={105}   colorPalette={currentPalette}/>
+      <Row3 translatex={79}    colorPalette={currentPalette}/>
+      <Row4 translatex={53}    colorPalette={currentPalette}/>
+      <Row5 translatex={26.3}  colorPalette={currentPalette}/>
+      <Row6                    colorPalette={currentPalette}/>
       <Row5 translatex={-26.3} colorPalette={currentPalette}/>
       <Row4 translatex={-53}   colorPalette={currentPalette}/>
       <Row3 translatex={-79}   colorPalette={currentPalette}/>
@@ -32,7 +34,6 @@ const Board = () => {
 
 const Container = styled.div`
   background-color: white;
-  border: 1px solid red;
   display: flex;
   justify-content: center;
   padding: 10px;

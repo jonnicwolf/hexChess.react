@@ -8,7 +8,7 @@ const Row1 = ({translatex, colorPalette}) => {
     const elements = [];
     for (let i = 0; i < count; i++) {
       color = colorPalette[i % colorPalette.length];
-      elements.push(<Hexagon key={`${i}`} color={color} />);
+      elements.push(<Hexagon key={`${i}`} color={color} cellID={[i]}/>);
     }
     return elements;
   };
