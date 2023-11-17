@@ -2,19 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import Hexagon from '../Hexagon';
 
-const Row1 = ({translatex, colorPalette}) => {
+const Row1 = ({translatex, translatey, colorPalette}) => {
   function renderElements(count) {
     let color
     const elements = [];
     for (let i = 0; i < count; i++) {
       color = colorPalette[i % colorPalette.length];
-      elements.push(<Hexagon key={`${i}`} color={color} cellID={[i]}/>);
+      elements.push(
+        <Hexagon key={`${i}`} color={color} cellID={`a${i}`} pieceImg={''}/>
+      );
     }
     return elements;
   };
 
   return (
-    <Container translatex={translatex}>
+    <Container translatex={translatex} translatey={translatey}>
       {renderElements(6)}
     </Container>
   )
@@ -24,7 +26,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100px;
-  transform: translate(${props => props.translatex}px, 214.5px);
+  transform: translate(${props => props.translatex}px, ${props => props.translatey}px);
 `;
 
 export default Row1;

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Hexagon from '../Hexagon';
 
-const Row2 = ({translatex, colorPalette}) => {
+const Row2 = ({translatex, translatey, colorPalette}) => {
   function renderElements(count) {
     let color;
     const elements = [];
@@ -15,7 +15,7 @@ const Row2 = ({translatex, colorPalette}) => {
   };
 
   return (
-    <Container translatex={translatex}>
+    <Container translatex={translatex} translatey={translatey}>
       {renderElements(7)}
     </Container>
   )
@@ -25,7 +25,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100px;
-  transform: translate(${props => props.translatex}px, 171px);
+  transform: translate(${props => props.translatex}px, ${props => props.translatey}px);
 `;
 
 export default Row2;
