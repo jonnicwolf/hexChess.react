@@ -35,33 +35,39 @@ const Hexagon = ({color, cellID, pieceImg}) => {
     ctx.fillStyle = isTouched ? '#fae57f' : color;
     ctx.stroke();
     ctx.fill();
-
-    // load and draw the image
-    const img = new Image();
-    img.src = bishop;
-    img.onload = () => {
-      // adjust these values to position your image correctly
-      const imgX = centerX - img.width / 2;
-      const imgY = centerY - img.height / 2;
-      ctx.drawImage(img, imgX, imgY);
-    };
   }, [isTouched]);
 
   return (
-    <HexagonCanvas
-      ref={canvasRef}
-      id="hexagon"
-      width={100}
-      height={88}
-      onClick={()=> setTouch(!isTouched)}>
-    </HexagonCanvas>
+    <Container>
+      <HexagonCanvas
+        ref={canvasRef}
+        id="hexagon"
+        width={100}
+        height={88}
+        onClick={()=> setTouch(!isTouched)}>
+      </HexagonCanvas>
+      <Img src="src/assets/pieces/icons8-bishop-solid-glyph-32.png" alt="foo" />
+
+    </Container>
   );
 };
 
+const Container = styled.div`
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+`;
+const Img = styled.img`
+  z-index: 1;
+  position: absolute;
+`;
 const HexagonCanvas = styled.canvas`
   border: none;
-  // border: 1px solid red;
-  // opacity: 0.1;
+  z-index: 0;
 `;
 
 export default Hexagon;

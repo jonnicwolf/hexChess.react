@@ -1,12 +1,11 @@
 import React from 'react';
 import Board from './components/Board';
-import Hexagon from './components/Hexagon';
 
 
 function App() {
   return (
     <>
-    <Hexagon color='red'/>
+      {/* <Hexagon color='red'/> */}
       <Board />
     </>
   );
