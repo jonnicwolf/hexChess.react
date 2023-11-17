@@ -28,7 +28,7 @@ const Board = () => {
 
   const earthTones = ['#FFA177','#E0BC6E','#949C73'];
   const funkyMoss = ['#44634D','#EC5082','#1B3E31'];
-  const kungFu = ['red', 'dimgrey', 'navajowhite'];
+  const kungFu = ['red', 'dimgrey', '#d1b488'];
   const leanne = ['#fc03be', '#fc8c03', 'purple'];
   const classic = ['white', 'grey', 'black'];
   const smileOrange = ['#fc8e08','#9fa19f','#8a5413'];
