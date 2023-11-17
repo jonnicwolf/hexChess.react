@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
-import bishop from "../assets/pieces/bishop";
-
-const Hexagon = ({color, cellID, pieceImg}) => {
+const Hexagon = ({color, cellID, piece}) => {
   const [isTouched, setTouch] = useState(false);
   const canvasRef = useRef(null);
 
@@ -46,8 +44,7 @@ const Hexagon = ({color, cellID, pieceImg}) => {
         height={88}
         onClick={()=> setTouch(!isTouched)}>
       </HexagonCanvas>
-      <Img src="src/assets/pieces/icons8-bishop-solid-glyph-32.png" alt="foo" />
-
+      <Img src={piece} />
     </Container>
   );
 };
@@ -62,8 +59,9 @@ const Container = styled.div`
   justify-content: center;
 `;
 const Img = styled.img`
-  z-index: 1;
+  height: 50px;
   position: absolute;
+  z-index: 1;
 `;
 const HexagonCanvas = styled.canvas`
   border: none;

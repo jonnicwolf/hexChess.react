@@ -2,14 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import Hexagon from '../Hexagon';
 
-const Row5 = ({ translatex, translatey, colorPalette, activeCellsSetter }) => {
+const Row5 = ({ translatex, translatey, colorPalette, pieces }) => {
   function renderElements(count) {
     let color
     const elements = [];
     for (let i = 0; i < count; i++) {
       const colorIndex = (i + 1) % colorPalette.length;
       color = colorPalette[colorIndex];
-      elements.push(<Hexagon key={`${i}`} color={color} />)}
+      elements.push(<Hexagon key={`${i}`} color={color} cellID={`e${i}`} piece={pieces[i]}/>)}
     return elements;
   };
 
