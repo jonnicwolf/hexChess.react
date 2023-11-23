@@ -7,7 +7,6 @@ import Row3 from './BoardRows/Row3';
 import Row4 from './BoardRows/Row4';
 import Row5 from './BoardRows/Row5';
 import Row6 from './BoardRows/Row6';
-import NewHex from './NewHex';
 
 const Board = () => {
   const starting_position = {
@@ -34,28 +33,24 @@ const Board = () => {
 
   const [board, setBoard] = useState(starting_position);
   const [activeCells, setActiveCells] = useState([]);
-  const [isTwoCellsActive, setIsTwoCellsActive] = useState(false);
 
   useEffect(() => {
+    if (activeCells.length > 2) setActiveCells([]);
     if (activeCells.length === 2) {
-      setIsTwoCellsActive(true);
+      console.log('two cells selected')
     }
-    else if (activeCells.length > 2) activeCells.length = 0
-    if (isTwoCellsActive) {
-
-    }
-  },[]);
+  },[activeCells]);
 
   return (
     <Container>
       <Row1
-        translatex={130}
-        translatey={220}
+        $translatex={130}
+        $translatey={220}
         colorPalette={currentPalette}
-        activeCellsSetter={setActiveCells}
-        activeCells={activeCells}
+        activeCellsSet={setActiveCells}
+        activeCellsGet={activeCells}
         pieces={starting_position.a}/>
-      <Row2
+      {/* <Row2
         translatex={104}
         translatey={176}
         colorPalette={currentPalette}
@@ -109,7 +104,7 @@ const Board = () => {
         translatey={220}
         colorPalette={currentPalette}
         activeCellsSetter={setActiveCells}
-        pieces={starting_position.l}/>
+        pieces={starting_position.l}/> */}
     </Container>
   );
 };

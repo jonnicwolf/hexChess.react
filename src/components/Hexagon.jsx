@@ -1,9 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
-const Hexagon = ({color, cellID, piece, activeCellSetter, activeCells}) => {
+const Hexagon = ({ 
+  color,
+  cellID,
+  piece,
+  hex_activeCellSetter,
+  hex_activeCells }) => {
+
   const [isTouched, setTouch] = useState(false);
   const canvasRef = useRef(null);
+
+  console.log('hexagon',hex_activeCells)
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -30,26 +38,25 @@ const Hexagon = ({color, cellID, piece, activeCellSetter, activeCells}) => {
     ctx.closePath();
     ctx.strokeStyle = 'black';
     ctx.lineWidth = 1;
-    ctx.fillStyle = isTouched ? '#fae57f' : color;
+    ctx.fillStyle = isTouched && hex_activeCells.length <= 2 ? '#fae57f' : color;
     ctx.stroke();
     ctx.fill();
   }, [isTouched]);
 
   function handleClick () {
     setTouch(!isTouched);
-    activeCellSetter([...activeCells,cellID]);
+    if (hex_activeCells.length > 2) setTouch(!isTouched);
+    hex_activeCellSetter([...hex_activeCells, cellID])
   };
 
   return (
     <Container onClick={()=>handleClick()}>
-      {/* <HexagonWrapper> */}
         <HexagonCanvas
           ref={canvasRef}
           id="hexagon"
           width={100}
           height={88}>
         </HexagonCanvas>
-      {/* </HexagonWrapper> */}
       <Img src={piece} />
     </Container>
   );
