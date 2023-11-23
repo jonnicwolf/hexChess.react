@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 import Row1 from './BoardRows/Row1';
@@ -7,11 +7,9 @@ import Row3 from './BoardRows/Row3';
 import Row4 from './BoardRows/Row4';
 import Row5 from './BoardRows/Row5';
 import Row6 from './BoardRows/Row6';
+import NewHex from './NewHex';
 
 const Board = () => {
-  const [board, setBoard] = useState({});
-  const [activeCells, setActiveCells] = useState([]);
-
   const starting_position = {
     a: ['','','','','',''],
     b: ['src/assets/pieces/black/pawn.png','','','','','','src/assets/pieces/white/pawn.png'],
@@ -24,7 +22,7 @@ const Board = () => {
     i: ['src/assets/pieces/black/rook.png','src/assets/pieces/black/pawn.png','','','','','src/assets/pieces/white/pawn.png','src/assets/pieces/white/rook.png'],
     k: ['src/assets/pieces/black/pawn.png','','','','','','src/assets/pieces/white/pawn.png'],
     l: ['','','','','',''],
-  }
+  };
 
   const earthTones = ['#FFA177','#E0BC6E','#949C73'];
   const funkyMoss = ['#44634D','#EC5082','#1B3E31'];
@@ -32,69 +30,83 @@ const Board = () => {
   const leanne = ['#fc03be', '#fc8c03', 'purple'];
   const classic = ['white', 'grey', 'black'];
   const smileOrange = ['#fc8e08','#9fa19f','#8a5413'];
+  const currentPalette = funkyMoss;
 
-  const currentPalette = kungFu;
+  const [board, setBoard] = useState(starting_position);
+  const [activeCells, setActiveCells] = useState([]);
+  const [isTwoCellsActive, setIsTwoCellsActive] = useState(false);
+
+  useEffect(() => {
+    if (activeCells.length === 2) {
+      setIsTwoCellsActive(true);
+    }
+    else if (activeCells.length > 2) activeCells.length = 0
+    if (isTwoCellsActive) {
+
+    }
+  },[]);
 
   return (
     <Container>
       <Row1
-        translatex={124}
-        translatey={219}
+        translatex={130}
+        translatey={220}
         colorPalette={currentPalette}
         activeCellsSetter={setActiveCells}
+        activeCells={activeCells}
         pieces={starting_position.a}/>
       <Row2
-        translatex={99}
-        translatey={175}
+        translatex={104}
+        translatey={176}
         colorPalette={currentPalette}
         activeCellsSetter={setActiveCells}
         pieces={starting_position.b}/>
       <Row3
-        translatex={75}
-        translatey={131}
+        translatex={78}
+        translatey={132}
         colorPalette={currentPalette}
         activeCellsSetter={setActiveCells}
         pieces={starting_position.c}/>
       <Row4 
-        translatex={50}
-        translatey={87}
+        translatex={52}
+        translatey={88}
         colorPalette={currentPalette}
         activeCellsSetter={setActiveCells}
         pieces={starting_position.d}/>
       <Row5 
-        translatex={25}
-        translatey={43}
+        translatex={26}
+        translatey={44}
         colorPalette={currentPalette}
         activeCellsSetter={setActiveCells}
         pieces={starting_position.e}/>
       <Row6 colorPalette={currentPalette} pieces={starting_position.f}/>
       <Row5
-        translatex={-25}
-        translatey={43}
+        translatex={-26}
+        translatey={44}
         colorPalette={currentPalette}
         activeCellsSetter={setActiveCells}
         pieces={starting_position.g}/>
       <Row4
-        translatex={-50}
-        translatey={87}
+        translatex={-52}
+        translatey={88}
         colorPalette={currentPalette}
         activeCellsSetter={setActiveCells}
         pieces={starting_position.h}/>
       <Row3
-        translatex={-75}
-        translatey={131}
+        translatex={-78}
+        translatey={132}
         colorPalette={currentPalette}
         activeCellsSetter={setActiveCells}
         pieces={starting_position.i}/>
       <Row2
-        translatex={-99}
-        translatey={175}
+        translatex={-104}
+        translatey={176}
         colorPalette={currentPalette}
         activeCellsSetter={setActiveCells}
         pieces={starting_position.k}/>
       <Row1
-        translatex={-124}
-        translatey={219}
+        translatex={-130}
+        translatey={220}
         colorPalette={currentPalette}
         activeCellsSetter={setActiveCells}
         pieces={starting_position.l}/>

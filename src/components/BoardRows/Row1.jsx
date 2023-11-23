@@ -1,16 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
 import Hexagon from '../Hexagon';
+import NewHex from '../NewHex';
 
-const Row1 = ({translatex, translatey, colorPalette, pieces}) => {
+const Row1 = ({translatex, translatey, colorPalette, activeCellSetter, activeCells, pieces}) => {
   function renderElements(count) {
     let color
     const elements = [];
     for (let i = 0; i < count; i++) {
       color = colorPalette[i % colorPalette.length];
       elements.push(
-        <Hexagon key={`${i}`} color={color} cellID={`a${i}`} piece={pieces[i]}/>
+        <Hexagon 
+          key={`${i}`}
+          color={color}
+          cellID={`a${i}`}
+          piece={pieces[i]}
+          activeCellSetter={activeCellSetter}
+          activeCells={ activeCells} />
       );
+      // elements.push(
+      //   <NewHex key={i}/>
+      // )
     }
     return elements;
   };
