@@ -27,9 +27,9 @@ const Board = () => {
   const funkyMoss = ['#44634D','#EC5082','#1e4d3b'];
   const kungFu = ['red', 'dimgrey', '#d1b488'];
   const leanne = ['#fc03be', '#fc8c03', 'purple'];
-  const classic = ['white', 'grey', 'black'];
+  const classic = ['lightGrey', 'darkGrey', 'slateGrey'];
   const smileOrange = ['#fc8e08','#9fa19f','#8a5413'];
-  const currentPalette = funkyMoss;
+  const currentPalette = classic;
 
   const [board, setBoard] = useState(starting_position);
   const [activeCells, setActiveCells] = useState([]);
