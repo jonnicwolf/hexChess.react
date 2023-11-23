@@ -5,13 +5,13 @@ const Hexagon = ({
   color,
   cellID,
   piece,
-  hex_activeCellSetter,
-  hex_activeCells }) => {
+  activeCellsSet,
+  activeCellsGet }) => {
 
   const [isTouched, setTouch] = useState(false);
   const canvasRef = useRef(null);
 
-  console.log('hexagon',hex_activeCells)
+  console.log(activeCellsGet)
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -20,7 +20,6 @@ const Hexagon = ({
     // Set the center and radius of the hexagon
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
-    // const radius = 97.5;
     const radius = 50;
 
     // Calculate the coordinates of the six points of the hexagon
@@ -38,15 +37,15 @@ const Hexagon = ({
     ctx.closePath();
     ctx.strokeStyle = 'black';
     ctx.lineWidth = 1;
-    ctx.fillStyle = isTouched && hex_activeCells.length <= 2 ? '#fae57f' : color;
+    ctx.fillStyle = isTouched && activeCellsGet.length <= 2 ? '#fae57f' : color;
     ctx.stroke();
     ctx.fill();
   }, [isTouched]);
 
   function handleClick () {
     setTouch(!isTouched);
-    if (hex_activeCells.length > 2) setTouch(!isTouched);
-    hex_activeCellSetter([...hex_activeCells, cellID])
+    if (activeCellsGet.length > 2) setTouch(!isTouched);
+    activeCellsSet([...activeCellsGet, cellID]);
   };
 
   return (

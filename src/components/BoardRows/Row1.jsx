@@ -1,19 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Hexagon from '../Hexagon';
 
 const Row1 = ({ 
-  $translatex,
-  $translatey,
+  translatex,
+  translatey,
   colorPalette,
   activeCellsSet,
   activeCellsGet,
   pieces }) => {
 
-  useEffect(()=> {
-    console.log('row1 get',activeCellsGet)
-    console.log('row1 set',activeCellsSet)
-  },[])
   function renderElements(count) {
     let color
     const elements = [];
@@ -33,7 +29,7 @@ const Row1 = ({
   };
 
   return (
-    <Container translatex={$translatex} translatey={$translatey}>
+    <Container translatex={translatex} translatey={translatey}>
       {renderElements(6)}
     </Container>
   )

@@ -44,67 +44,80 @@ const Board = () => {
   return (
     <Container>
       <Row1
-        $translatex={130}
-        $translatey={220}
+        translatex={130}
+        translatey={220}
         colorPalette={currentPalette}
         activeCellsSet={setActiveCells}
         activeCellsGet={activeCells}
         pieces={starting_position.a}/>
-      {/* <Row2
+      <Row2
         translatex={104}
         translatey={176}
         colorPalette={currentPalette}
-        activeCellsSetter={setActiveCells}
+        activeCellsSet={setActiveCells}
+        activeCellsGet={activeCells}
         pieces={starting_position.b}/>
       <Row3
         translatex={78}
         translatey={132}
         colorPalette={currentPalette}
-        activeCellsSetter={setActiveCells}
+        activeCellsSet={setActiveCells}
+        activeCellsGet={activeCells}
         pieces={starting_position.c}/>
       <Row4 
         translatex={52}
         translatey={88}
         colorPalette={currentPalette}
-        activeCellsSetter={setActiveCells}
+        activeCellsSet={setActiveCells}
+        activeCellsGet={activeCells}
         pieces={starting_position.d}/>
       <Row5 
         translatex={26}
         translatey={44}
         colorPalette={currentPalette}
-        activeCellsSetter={setActiveCells}
+        activeCellsSet={setActiveCells}
+        activeCellsGet={activeCells}
         pieces={starting_position.e}/>
-      <Row6 colorPalette={currentPalette} pieces={starting_position.f}/>
+      <Row6
+        colorPalette={currentPalette}
+        activeCellsSet={setActiveCells}
+        activeCellsGet={activeCells}
+        pieces={starting_position.f}/>
       <Row5
         translatex={-26}
         translatey={44}
         colorPalette={currentPalette}
-        activeCellsSetter={setActiveCells}
+        activeCellsSet={setActiveCells}
+        activeCellsGet={activeCells}
         pieces={starting_position.g}/>
       <Row4
         translatex={-52}
         translatey={88}
         colorPalette={currentPalette}
-        activeCellsSetter={setActiveCells}
+        activeCellsSet={setActiveCells}
+        activeCellsGet={activeCells}
         pieces={starting_position.h}/>
       <Row3
         translatex={-78}
         translatey={132}
         colorPalette={currentPalette}
-        activeCellsSetter={setActiveCells}
+        activeCellsSet={setActiveCells}
+        activeCellsGet={activeCells}
         pieces={starting_position.i}/>
       <Row2
         translatex={-104}
         translatey={176}
         colorPalette={currentPalette}
-        activeCellsSetter={setActiveCells}
+        activeCellsSet={setActiveCells}
+        activeCellsGet={activeCells}
         pieces={starting_position.k}/>
       <Row1
         translatex={-130}
         translatey={220}
         colorPalette={currentPalette}
-        activeCellsSetter={setActiveCells}
-        pieces={starting_position.l}/> */}
+        activeCellsSet={setActiveCells}
+        activeCellsGet={activeCells}
+        pieces={starting_position.l}/>
     </Container>
   );
 };
