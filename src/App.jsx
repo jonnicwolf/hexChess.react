@@ -4,10 +4,7 @@ import Board from './components/Board';
 
 function App() {
   return (
-    <>
-      {/* <Hexagon color='red'/> */}
-      <Board />
-    </>
+    <Board />
   );
 };
 

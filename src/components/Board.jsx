@@ -123,7 +123,6 @@ const Board = () => {
 };
 
 const Container = styled.div`
-border: 1px solid red;
   background-color: white;
   display: flex;
   justify-content: center;
