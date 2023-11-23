@@ -11,8 +11,6 @@ const Hexagon = ({
   const [isTouched, setTouch] = useState(false);
   const canvasRef = useRef(null);
 
-  console.log(activeCellsGet)
-
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
@@ -33,7 +31,7 @@ const Hexagon = ({
     // drawing the hexagon
     ctx.beginPath();
     ctx.moveTo(xPoints[0], yPoints[0]);
-    for (let i = 1; i < 6; i++) { ctx.lineTo(xPoints[i], yPoints[i]) };
+    for (let i = 1; i < 6; i++) ctx.lineTo(xPoints[i], yPoints[i]);
     ctx.closePath();
     ctx.strokeStyle = 'black';
     ctx.lineWidth = 1;

@@ -37,7 +37,7 @@ const Board = () => {
   useEffect(() => {
     if (activeCells.length > 2) setActiveCells([]);
     if (activeCells.length === 2) {
-      console.log('two cells selected')
+      console.log('boop')
     }
   },[activeCells]);
 
