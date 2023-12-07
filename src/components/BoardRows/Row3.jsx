@@ -19,10 +19,10 @@ const Row3 = ({
         <Hexagon
           key={`${i}`}
           color={color}
-          cellID={`c${i}`}
+          cellID={pieces[i].position}
+          piece={pieces[i].piece.pieceImgPath}
           activeCellsSet={activeCellsSet}
-          activeCellsGet={activeCellsGet}
-          piece={pieces[i]} />
+          activeCellsGet={activeCellsGet} />
       );
     };
     return elements;
