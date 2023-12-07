@@ -48,12 +48,11 @@ const Hexagon = ({
 
   return (
     <Container onClick={()=>handleClick()}>
-        <HexagonCanvas
-          ref={canvasRef}
-          id="hexagon"
-          width={100}
-          height={88}>
-        </HexagonCanvas>
+      <HexagonCanvas
+        ref={canvasRef}
+        id="hexagon"
+        width={100}
+        height={88} />
       <Img src={piece} />
     </Container>
   );
