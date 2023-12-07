@@ -19,8 +19,8 @@ const Row1 = ({
         <Hexagon 
           key={`${i}`}
           color={color}
-          cellID={`a${i}`}
-          piece={pieces[i]}
+          cellID={pieces[i].position}
+          piece={pieces[i].piece.pieceImgPath}
           hex_activeCellSetter={activeCellsSet}
           hex_activeCells={activeCellsGet} />
       );
