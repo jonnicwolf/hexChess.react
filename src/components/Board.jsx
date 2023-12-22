@@ -8,6 +8,8 @@ import Row4 from './BoardRows/Row4';
 import Row5 from './BoardRows/Row5';
 import Row6 from './BoardRows/Row6';
 
+import { pawn_move } from './pieceMovements';
+
 const Board = () => {
   const pieces = {
     black: {
@@ -148,10 +150,48 @@ const Board = () => {
   useEffect(() => {
     if (activeCells.length > 2) setActiveCells([]);
     if (activeCells.length === 2) {
-      if (board[activeCells[1]] === '') {
-        
-      };
-    }
+      //fire out which cells are being touched ✅
+      const a_coordinates = activeCells[0]
+      const a_cell        = a_coordinates[1]-1
+      const a_column      = a_coordinates[0]
+
+      const b_coordinates = activeCells[1];
+      const b_cell        = b_coordinates[1]-1;
+      const b_column      = b_coordinates[0];
+      //figure out what piece if any is present ✅
+      let a_piece = board[a_column][a_cell].piece.pieceType
+      //once we have a piece/s we can determine if its a move or an attack
+      switch (board[b_column][b_cell].pieceType !== null) {
+        case 'bishop':
+          // Statements executed when the result of expression matches value1
+          break;
+        case 'king':
+          // Statements executed when the result of expression matches value2
+          break;
+        case 'knight':
+          // Statements executed when the result of expression matches value2
+          break;
+        case 'pawn':
+          pawn_move(activeCells,board);
+          break;
+        case 'rook':
+          // Statements executed when the result of expression matches value2
+          break;
+        case 'queen':
+          // Statements executed when the result of expression matches value2
+          break;
+        // You can have any number of case statements
+        default:
+          // Statements executed if none of the cases match the expression
+      }
+      //run a case for move:
+        //figure out what the piece is on a_cell
+        //figure out if the move is legal
+        //run correct function to move it
+      //run a case for atk: 
+        //figure out if there's a blocking piece in the path
+        //if yes, alert player that atk is illegal
+    };
   },[activeCells]);
 
   return (
