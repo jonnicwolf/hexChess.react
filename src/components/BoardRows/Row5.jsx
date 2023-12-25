@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Hexagon from '../Hexagon';
 
-const Row5 = ({ 
+const Row5 = ({
   translatex,
   translatey,
   colorPalette,
@@ -19,10 +19,10 @@ const Row5 = ({
         <Hexagon
           key={`${i}`}
           color={color}
-          cellID={`e${i}`}
+          cellID={pieces[i].position}
+          piece={pieces[i].piece.pieceImgPath}
           activeCellsSet={activeCellsSet}
-          activeCellsGet={activeCellsGet}
-          piece={pieces[i]}/>
+          activeCellsGet={activeCellsGet} />
       );
     };
     return elements;
