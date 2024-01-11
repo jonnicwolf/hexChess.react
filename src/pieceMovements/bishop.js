@@ -122,28 +122,6 @@ const starting_position = {
       {position: [11,6], piece: {pieceType: null, pieceImgPath: null}} ],
 };
 
-export const pawn_move = (activeCells, board) => {
-  const a_coordinates = activeCells[0]
-  const a_cell        = a_coordinates[1]-1
-  const a_column      = a_coordinates[0]
-
-  const b_coordinates = activeCells[1];
-  const b_cell        = b_coordinates[1]-1;
-  const b_column      = b_coordinates[0];
-
-  if (
-    board[a_column][a_cell].piece.pieceType === 'pawn' &&
-    board[b_column][b_cell].piece.pieceType === null && 
-    board[b_column][b_cell].position[0]     === board[a_column][a_cell].position[0] &&
-    board[b_column][b_cell].position[1]       - board[a_column][a_cell].position[1] <= 2 ) {
-
-    board[b_column][b_cell].piece.pieceType    = board[a_column][a_cell].piece.pieceType;
-    board[b_column][b_cell].piece.pieceImgPath = board[a_column][a_cell].piece.pieceImgPath;
-    board[b_column][b_cell].piece.pieceColor   = board[a_column][a_cell].piece.pieceColor;
-
-  } else return;
-};
-
 export const bishop_move = (activeCells, board) => {
   const a_coordinates = activeCells[0];
   const a_cell        = a_coordinates[1];
@@ -168,111 +146,88 @@ export const bishop_move = (activeCells, board) => {
     console.log(starting_position[column])
     for (let row in starting_position[column]) {
       let current_position = starting_position[column][row].position
-      if (!all_positions[current_position]) {
-        all_positions[current_position] = starting_position[column][row].position
-      }
-    }
-  }
+      if (!all_positions[current_position]) all_positions[current_position] = starting_position[column][row].position;
+    };
+  };
 
-  let [a_column_clone_1, a_cell_clone_1, leftmost_cell] = [a_column, a_cell, []];
+  // F-LINE 1
+  let [a_column_clone_1, a_cell_clone_1, leftmost_cell_1] = [a_column, a_cell, []];
   do {
     if (a_column_clone_1 <= 1 || a_cell_clone_1 <= 1) {
-      leftmost_cell = leftmost_cell[leftmost_cell.length-1];
+      leftmost_cell_1 = leftmost_cell_1[leftmost_cell_1.length-1];
       break;
     };
-    if (a_column_clone_1 <= 6) a_cell_clone_1-=2;
+    if (a_column_clone_1 <= 6) a_cell_clone_1 -= 2;
     else a_cell_clone_1--;
     a_column_clone_1--;
-    leftmost_cell.push([a_column_clone_1, a_cell_clone_1]);
+    leftmost_cell_1.push([a_column_clone_1, a_cell_clone_1]);
   } while (board[a_column_clone_1][a_cell_clone_1]);
-
-  let rightmost_cell = []
+  let rightmost_cell_1 = []
   do {
     if (board[a_column_clone_1][a_cell_clone_1] === false) {
-      rightmost_cell = rightmost_cell[rightmost_cell.length - 1];
+      rightmost_cell_1 = rightmost_cell_1[rightmost_cell_1.length - 1];
       break;
-    }
+    } 
+    // else a_cell_clone_1+=2;
+    if (a_column_clone_1 < 6) a_cell_clone_1 += 2;
     else a_cell_clone_1++;
+    
     a_column_clone_1++;
-    rightmost_cell.push([a_column_clone_1, a_cell_clone_1]);
+    rightmost_cell_1.push([a_column_clone_1, a_cell_clone_1]);
   } while (board[a_column_clone_1][a_cell_clone_1]);
-  
-  const f_line_1 = [leftmost_cell, ...rightmost_cell];
 
-  
+  // F-LINE 2
+  let [a_column_clone_2, a_cell_clone_2, leftmost_cell_2] = [a_column, a_cell, []];
+  do {
+    if (a_column_clone_2 <= 1 || a_cell_clone_2 <= 1) {
+      leftmost_cell_2 = leftmost_cell_2[leftmost_cell_2.length-1];
+      break;
+    };
+    if (a_column_clone_2 <= 6) a_cell_clone_2 += 2 
+    else a_cell_clone_2--;
+    a_column_clone_2--;
+    leftmost_cell_2.push([a_column_clone_2, a_cell_clone_2]);
+  } while (board[a_column_clone_2][a_cell_clone_2]);
+  let rightmost_cell_2 = []
+  do {
+    if (board[a_column_clone_2][a_cell_clone_2] === false) {
+      rightmost_cell_2 = rightmost_cell_2[rightmost_cell_2.length - 1];
+      break;
+    } else a_cell_clone_2-=2;
 
+    a_column_clone_2++;
+    rightmost_cell_2.push([a_column_clone_2, a_cell_clone_2]);
+  } while (board[a_column_clone_2][a_cell_clone_2]);
+
+  // F-LINE 3
+  let [a_column_clone_3, a_cell_clone_3, leftmost_cell_3] = [a_column, a_cell, []];
+  do {
+    if (a_column_clone_3 <= 1 || a_cell_clone_3 <= 1) {
+      leftmost_cell_3 = leftmost_cell_3[leftmost_cell_3.length-1];
+      break;
+    };
+    if (a_column_clone_3 <= 6) a_cell_clone_3 -= 2;
+    else a_cell_clone_3--;
+    a_column_clone_3--;
+    leftmost_cell_3.push([a_column_clone_3, a_cell_clone_3]);
+  } while (board[a_column_clone_3][a_cell_clone_3]);
+  let rightmost_cell_3 = []
+  do {
+    if (board[a_column_clone_3][a_cell_clone_3] === false) {
+      rightmost_cell_3 = rightmost_cell_3[rightmost_cell_3.length - 1];
+      break;
+    } else a_cell_clone_3++;
+    a_column_clone_3++;
+    rightmost_cell_3.push([a_column_clone_3, a_cell_clone_3]);
+  } while (board[a_column_clone_3][a_cell_clone_3]);
   
+  const f_line_1 = [leftmost_cell_1, ...rightmost_cell_1];
+  const f_line_2 = [leftmost_cell_2, ...rightmost_cell_2];
+  const f_line_3 = [leftmost_cell_3, ...rightmost_cell_3];
+
+  console.log(f_line_1)
+  console.log(f_line_2)
+  console.log(f_line_3)
 }
 
 console.log(bishop_move([[7,6],[5,2]],starting_position))
-
-
-
-
-// export const king_move = (activeCells, board) => {
-//   const a_coordinates = activeCells[0]
-//   const a_cell        = a_coordinates[1]-1
-//   const a_column      = a_coordinates[0]
-
-//   const b_coordinates = activeCells[1];
-//   const b_cell        = b_coordinates[1]-1;
-//   const b_column      = b_coordinates[0];
-
-//   if (
-//     board[a_column][a_cell].piece.pieceType === 'king' &&
-//     board[b_column][b_cell].piece.pieceType === null
-//   ) {
-
-//   }
-// }
-
-// export const knight_move = () => {
-//   const a_coordinates = activeCells[0]
-//   const a_cell        = a_coordinates[1]-1
-//   const a_column      = a_coordinates[0]
-
-//   const b_coordinates = activeCells[1];
-//   const b_cell        = b_coordinates[1]-1;
-//   const b_column      = b_coordinates[0];
-
-//   if (
-//     board[a_column][a_cell].piece.pieceType === 'knight' &&
-//     board[b_column][b_cell].piece.pieceType === null
-//   ) {
-
-//   }
-// }
-
-// export const rook_move = () => {
-//   const a_coordinates = activeCells[0]
-//   const a_cell        = a_coordinates[1]-1
-//   const a_column      = a_coordinates[0]
-
-//   const b_coordinates = activeCells[1];
-//   const b_cell        = b_coordinates[1]-1;
-//   const b_column      = b_coordinates[0];
-
-//   if (
-//     board[a_column][a_cell].piece.pieceType === 'rook' &&
-//     board[b_column][b_cell].piece.pieceType === null
-//   ) {
-
-//   }
-// }
-
-// export const queen_move = () => {
-//   const a_coordinates = activeCells[0]
-//   const a_cell        = a_coordinates[1]-1
-//   const a_column      = a_coordinates[0]
-
-//   const b_coordinates = activeCells[1];
-//   const b_cell        = b_coordinates[1]-1;
-//   const b_column      = b_coordinates[0];
-
-//   if (
-//     board[a_column][a_cell].piece.pieceType === 'queen' &&
-//     board[b_column][b_cell].piece.pieceType === null
-//   ) {
-
-//   }
-// }
