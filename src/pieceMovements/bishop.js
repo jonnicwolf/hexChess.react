@@ -53,7 +53,7 @@ const starting_position = {
       {position: [4,8], piece: {pieceType: null, pieceImgPath: null}},
       {position: [4,9], piece: {pieceType: 'knight', pieceImgPath: white.pawn}} ],
     5: [
-      {position: [5,1], piece: {pieceType: 'king', pieceImgPath: black.king}},
+      {position: [5,1], piece: {pieceType: 'queen', pieceImgPath: black.queen}},
       {position: [5,2], piece: {pieceType: null, pieceImgPath: null}},
       {position: [5,3], piece: {pieceType: null, pieceImgPath: null}},
       {position: [5,4], piece: {pieceType: 'pawn', pieceImgPath: black.pawn}},
@@ -62,7 +62,7 @@ const starting_position = {
       {position: [5,7], piece: {pieceType: 'pawn', pieceImgPath: white.pawn}},
       {position: [5,8], piece: {pieceType: null, pieceImgPath: null}},
       {position: [5,9], piece: {pieceType: null, pieceImgPath: null}},
-      {position: [5,10], piece: {pieceType: 'king', pieceImgPath: white.king}} ],
+      {position: [5,10], piece: {pieceType: 'queen', pieceImgPath: white.queen}} ],
     6: [
       {position: [6,1], piece: {pieceType: 'bishop', pieceImgPath: black.bishop}},
       {position: [6,2], piece: {pieceType: 'bishop', pieceImgPath: black.bishop}},
@@ -76,7 +76,7 @@ const starting_position = {
       {position: [6,10], piece: {pieceType: 'bishop', pieceImgPath: white.bishop}},
       {position: [6,11], piece: {pieceType: 'bishop', pieceImgPath: white.bishop}} ],
     7: [
-      {position: [7,1], piece: {pieceType: 'queen', pieceImgPath: black.queen}},
+      {position: [7,1], piece: {pieceType: 'king', pieceImgPath: black.king}},
       {position: [7,2], piece: {pieceType: null, pieceImgPath: null}},
       {position: [7,3], piece: {pieceType: null, pieceImgPath: null}},
       {position: [7,4], piece: {pieceType: 'pawn', pieceImgPath: black.pawn}},
@@ -85,7 +85,7 @@ const starting_position = {
       {position: [7,7], piece: {pieceType: null, pieceImgPath: null}},
       {position: [7,8], piece: {pieceType: 'pawn', pieceImgPath: white.pawn}},
       {position: [7,9], piece: {pieceType: null, pieceImgPath: null}},
-      {position: [7,10], piece: {pieceType: 'queen', pieceImgPath: white.queen}} ],
+      {position: [7,10], piece: {pieceType: 'king', pieceImgPath: white.king}} ],
     8: [
       {position: [8,1], piece: {pieceType: 'b_knight', pieceImgPath: black.knight}},
       {position: [8,2], piece: {pieceType: null, pieceImgPath: null}},
@@ -159,16 +159,17 @@ export const bishop_move = (activeCells, board) => {
     };
     if (a_column_clone_1 <= 6) a_cell_clone_1 -= 2;
     else a_cell_clone_1--;
+
     a_column_clone_1--;
     leftmost_cell_1.push([a_column_clone_1, a_cell_clone_1]);
   } while (board[a_column_clone_1][a_cell_clone_1]);
-  let rightmost_cell_1 = []
+
+  let rightmost_cell_1 = [];
   do {
     if (board[a_column_clone_1][a_cell_clone_1] === false) {
       rightmost_cell_1 = rightmost_cell_1[rightmost_cell_1.length - 1];
       break;
-    } 
-    // else a_cell_clone_1+=2;
+    }
     if (a_column_clone_1 < 6) a_cell_clone_1 += 2;
     else a_cell_clone_1++;
     
@@ -177,57 +178,69 @@ export const bishop_move = (activeCells, board) => {
   } while (board[a_column_clone_1][a_cell_clone_1]);
 
   // F-LINE 2
-  let [a_column_clone_2, a_cell_clone_2, leftmost_cell_2] = [a_column, a_cell, []];
+  // Cells must be counted as -/1 to account for how cells are stored in the ledger
+  let [a_column_clone_2,a_cell_clone_2,leftmost_cell_2] = [a_column, a_cell, null];
   do {
-    if (a_column_clone_2 <= 1 || a_cell_clone_2 <= 1) {
-      leftmost_cell_2 = leftmost_cell_2[leftmost_cell_2.length-1];
+    if (board[a_column_clone_2][a_cell_clone_2]) {
+      leftmost_cell_2 = [a_column_clone_2, a_cell_clone_2];
+      console.log(leftmost_cell_2)
+      console.log(board[a_column_clone_2][a_cell_clone_2])
+    };
+    a_column_clone_2--;
+    if (a_column_clone_2 < 6) a_cell_clone_2++
+    else a_cell_clone_2 += 2;
+  } while (board[a_column_clone_2][a_cell_clone_2]);
+  let rightmost_cell_2 = [];
+
+  console.log(leftmost_cell_2)
+  let leftmost_cell_2_clone = leftmost_cell_2
+  do {
+    if (leftmost_cell_2_clone[0] >= 11 || leftmost_cell_2_clone[1] <= 1) {
       break;
     };
-    if (a_column_clone_2 <= 6) a_cell_clone_2 += 2 
-    else a_cell_clone_2--;
-    a_column_clone_2--;
-    leftmost_cell_2.push([a_column_clone_2, a_cell_clone_2]);
-  } while (board[a_column_clone_2][a_cell_clone_2]);
-  let rightmost_cell_2 = []
-  do {
-    if (board[a_column_clone_2][a_cell_clone_2] === false) {
-      rightmost_cell_2 = rightmost_cell_2[rightmost_cell_2.length - 1];
-      break;
-    } else a_cell_clone_2-=2;
-
-    a_column_clone_2++;
-    rightmost_cell_2.push([a_column_clone_2, a_cell_clone_2]);
-  } while (board[a_column_clone_2][a_cell_clone_2]);
+    if ( board[leftmost_cell_2_clone[0]][leftmost_cell_2_clone[1]] ) {
+      if (leftmost_cell_2_clone[0] < 6) {
+        leftmost_cell_2_clone[0]++
+        leftmost_cell_2_clone[1]--
+      } else {
+        leftmost_cell_2_clone[0]++
+        leftmost_cell_2_clone[1]-=2
+      };
+      console.log(leftmost_cell_2_clone)
+      rightmost_cell_2.push( leftmost_cell_2_clone );
+      console.log(rightmost_cell_2)
+    }
+  } while (board[leftmost_cell_2_clone[0]][leftmost_cell_2_clone[1]]);
 
   // F-LINE 3
-  let [a_column_clone_3, a_cell_clone_3, leftmost_cell_3] = [a_column, a_cell, []];
-  do {
-    if (a_column_clone_3 <= 1 || a_cell_clone_3 <= 1) {
-      leftmost_cell_3 = leftmost_cell_3[leftmost_cell_3.length-1];
-      break;
-    };
-    if (a_column_clone_3 <= 6) a_cell_clone_3 -= 2;
-    else a_cell_clone_3--;
-    a_column_clone_3--;
-    leftmost_cell_3.push([a_column_clone_3, a_cell_clone_3]);
-  } while (board[a_column_clone_3][a_cell_clone_3]);
-  let rightmost_cell_3 = []
-  do {
-    if (board[a_column_clone_3][a_cell_clone_3] === false) {
-      rightmost_cell_3 = rightmost_cell_3[rightmost_cell_3.length - 1];
-      break;
-    } else a_cell_clone_3++;
-    a_column_clone_3++;
-    rightmost_cell_3.push([a_column_clone_3, a_cell_clone_3]);
-  } while (board[a_column_clone_3][a_cell_clone_3]);
+  // let [a_column_clone_3, a_cell_clone_3, leftmost_cell_3] = [a_column, a_cell, []];
+  // do {
+  //   if (a_column_clone_3 <= 1 || a_cell_clone_3 <= 1) {
+  //     leftmost_cell_3 = leftmost_cell_3[leftmost_cell_3.length-1];
+  //     break;
+  //   };
+  //   if (a_column_clone_3 <= 6) a_cell_clone_3 -= 2;
+  //   else a_cell_clone_3--;
+  //   a_column_clone_3--;
+  //   leftmost_cell_3.push([a_column_clone_3, a_cell_clone_3]);
+  // } while (board[a_column_clone_3][a_cell_clone_3]);
+  // let rightmost_cell_3 = []
+  // do {
+  //   if (board[a_column_clone_3][a_cell_clone_3] === false) {
+  //     rightmost_cell_3 = rightmost_cell_3[rightmost_cell_3.length - 1];
+  //     break;
+  //   } else a_cell_clone_3++;
+  //   a_column_clone_3++;
+  //   rightmost_cell_3.push([a_column_clone_3, a_cell_clone_3]);
+  // } while (board[a_column_clone_3][a_cell_clone_3]);
   
   const f_line_1 = [leftmost_cell_1, ...rightmost_cell_1];
   const f_line_2 = [leftmost_cell_2, ...rightmost_cell_2];
-  const f_line_3 = [leftmost_cell_3, ...rightmost_cell_3];
+  // const f_line_3 = [leftmost_cell_3, ...rightmost_cell_3];
 
   console.log(f_line_1)
   console.log(f_line_2)
-  console.log(f_line_3)
-}
+  // console.log(f_line_3)
+};
 
-console.log(bishop_move([[7,6],[5,2]],starting_position))
+console.log(bishop_move([[7,6],[5,2]],starting_position)); 
