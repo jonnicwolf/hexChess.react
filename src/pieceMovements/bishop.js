@@ -165,14 +165,16 @@ export const bishop_move = (activeCells, board) => {
   } while (board[a_column_clone_1][a_cell_clone_1]);
 
   let rightmost_cell_1 = [];
+  console.log(rightmost_cell_1)
   do {
     if (board[a_column_clone_1][a_cell_clone_1] === false) {
+      console.log(rightmost_cell_1)
       rightmost_cell_1 = rightmost_cell_1[rightmost_cell_1.length - 1];
       break;
     }
     if (a_column_clone_1 < 6) a_cell_clone_1 += 2;
     else a_cell_clone_1++;
-    
+
     a_column_clone_1++;
     rightmost_cell_1.push([a_column_clone_1, a_cell_clone_1]);
   } while (board[a_column_clone_1][a_cell_clone_1]);
@@ -181,35 +183,28 @@ export const bishop_move = (activeCells, board) => {
   // Cells must be counted as -/1 to account for how cells are stored in the ledger
   let [a_column_clone_2,a_cell_clone_2,leftmost_cell_2] = [a_column, a_cell, null];
   do {
-    if (board[a_column_clone_2][a_cell_clone_2]) {
-      leftmost_cell_2 = [a_column_clone_2, a_cell_clone_2];
-      console.log(leftmost_cell_2)
-      console.log(board[a_column_clone_2][a_cell_clone_2])
-    };
+    if (board[a_column_clone_2][a_cell_clone_2]) {leftmost_cell_2 = [a_column_clone_2, a_cell_clone_2] };
     a_column_clone_2--;
+
     if (a_column_clone_2 < 6) a_cell_clone_2++
     else a_cell_clone_2 += 2;
   } while (board[a_column_clone_2][a_cell_clone_2]);
-  let rightmost_cell_2 = [];
 
-  console.log(leftmost_cell_2)
-  let leftmost_cell_2_clone = leftmost_cell_2
+  let rightmost_cell_2 = [];
+  let leftmost_cell_2_clone = [...leftmost_cell_2];
+  
   do {
-    if (leftmost_cell_2_clone[0] >= 11 || leftmost_cell_2_clone[1] <= 1) {
-      break;
-    };
     if ( board[leftmost_cell_2_clone[0]][leftmost_cell_2_clone[1]] ) {
       if (leftmost_cell_2_clone[0] < 6) {
-        leftmost_cell_2_clone[0]++
-        leftmost_cell_2_clone[1]--
+        leftmost_cell_2_clone[0]++;
+        leftmost_cell_2_clone[1]--;
       } else {
-        leftmost_cell_2_clone[0]++
-        leftmost_cell_2_clone[1]-=2
+        leftmost_cell_2_clone[0]++;
+        leftmost_cell_2_clone[1]-=2;
       };
-      console.log(leftmost_cell_2_clone)
-      rightmost_cell_2.push( leftmost_cell_2_clone );
-      console.log(rightmost_cell_2)
-    }
+      rightmost_cell_2.push( [leftmost_cell_2_clone[0],leftmost_cell_2_clone[1]] );
+    };
+    if (leftmost_cell_2_clone[0] >= 11 || leftmost_cell_2_clone[1] <= 2) break;
   } while (board[leftmost_cell_2_clone[0]][leftmost_cell_2_clone[1]]);
 
   // F-LINE 3
