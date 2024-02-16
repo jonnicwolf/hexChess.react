@@ -127,29 +127,6 @@ export const bishop_move = (activeCells, board) => {
   const a_cell        = a_coordinates[1];
   const a_column      = a_coordinates[0];
 
-  const b_coordinates = activeCells[1];
-  const b_cell        = b_coordinates[1];
-  const b_column      = b_coordinates[0];
-
-  function totalCountInArrays(obj) {
-    let total = 0;
-    for (const key in obj) {
-        if (obj.hasOwnProperty(key)) {
-            total += obj[key].length;
-        }
-    }
-    return total;
-  }
-
-  let all_positions = {}
-  for (let column in starting_position) {
-    console.log(starting_position[column])
-    for (let row in starting_position[column]) {
-      let current_position = starting_position[column][row].position
-      if (!all_positions[current_position]) all_positions[current_position] = starting_position[column][row].position;
-    };
-  };
-
   // F-LINE 1
   let [a_column_clone_1, a_cell_clone_1, leftmost_cell_1] = [a_column, a_cell, []];
   do {
@@ -165,13 +142,11 @@ export const bishop_move = (activeCells, board) => {
   } while (board[a_column_clone_1][a_cell_clone_1]);
 
   let rightmost_cell_1 = [];
-  console.log(rightmost_cell_1)
   do {
     if (board[a_column_clone_1][a_cell_clone_1] === false) {
-      console.log(rightmost_cell_1)
       rightmost_cell_1 = rightmost_cell_1[rightmost_cell_1.length - 1];
       break;
-    }
+    };
     if (a_column_clone_1 < 6) a_cell_clone_1 += 2;
     else a_cell_clone_1++;
 
@@ -186,7 +161,7 @@ export const bishop_move = (activeCells, board) => {
     if (board[a_column_clone_2][a_cell_clone_2]) {leftmost_cell_2 = [a_column_clone_2, a_cell_clone_2] };
     a_column_clone_2--;
 
-    if (a_column_clone_2 < 6) a_cell_clone_2++
+    if (a_column_clone_2 < 6) a_cell_clone_2++;
     else a_cell_clone_2 += 2;
   } while (board[a_column_clone_2][a_cell_clone_2]);
 
@@ -228,14 +203,40 @@ export const bishop_move = (activeCells, board) => {
   //   a_column_clone_3++;
   //   rightmost_cell_3.push([a_column_clone_3, a_cell_clone_3]);
   // } while (board[a_column_clone_3][a_cell_clone_3]);
-  
+  let [a_column_clone_3, a_cell_clone_3, leftmost_cell_3] = [a_column, a_cell, null];
+  do {
+    if (board[a_column_clone_3][a_cell_clone_3] !== undefined) leftmost_cell_3 = [a_column_clone_3, a_cell_clone_3];
+    if (a_column_clone_3 === 7) a_column_clone_3-=2;
+    else {
+      a_column_clone_3-=2;
+      a_cell_clone_3--;
+    };
+    if (a_column_clone_3 < 1) break;
+  } while (board[a_column_clone_3][a_cell_clone_3] !== true);
+
+  let rightmost_cell_3 = [];
+  let leftmost_cell_3_clone = [...leftmost_cell_3];
+  do {
+    if ( board[leftmost_cell_3_clone[0]][leftmost_cell_3_clone[1]] ) {
+      if (leftmost_cell_3_clone[0] === 5) {
+        leftmost_cell_3_clone[0]+=2;
+      } else if (leftmost_cell_3_clone[0] > 5) {
+          leftmost_cell_3_clone[0]+=2;
+          leftmost_cell_3_clone[1]--;
+      } else {
+          leftmost_cell_3_clone[0]+=2;
+          leftmost_cell_3_clone[1]++;
+      };
+    };
+    if (leftmost_cell_3_clone[0] > 11) break;
+    rightmost_cell_3.push([...leftmost_cell_3_clone]);
+  } while (board[leftmost_cell_3_clone[0]][leftmost_cell_3_clone[1]]);
+
   const f_line_1 = [leftmost_cell_1, ...rightmost_cell_1];
   const f_line_2 = [leftmost_cell_2, ...rightmost_cell_2];
-  // const f_line_3 = [leftmost_cell_3, ...rightmost_cell_3];
+  const f_line_3 = [leftmost_cell_3, ...rightmost_cell_3];
 
-  console.log(f_line_1)
-  console.log(f_line_2)
-  // console.log(f_line_3)
+  return [...f_line_1, ...f_line_2, ...f_line_3];
 };
 
-console.log(bishop_move([[7,6],[5,2]],starting_position)); 
+console.log(bishop_move( [[7,6],[5,2]], starting_position ));
