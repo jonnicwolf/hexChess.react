@@ -183,26 +183,6 @@ export const bishop_move = (activeCells, board) => {
   } while (board[leftmost_cell_2_clone[0]][leftmost_cell_2_clone[1]]);
 
   // F-LINE 3
-  // let [a_column_clone_3, a_cell_clone_3, leftmost_cell_3] = [a_column, a_cell, []];
-  // do {
-  //   if (a_column_clone_3 <= 1 || a_cell_clone_3 <= 1) {
-  //     leftmost_cell_3 = leftmost_cell_3[leftmost_cell_3.length-1];
-  //     break;
-  //   };
-  //   if (a_column_clone_3 <= 6) a_cell_clone_3 -= 2;
-  //   else a_cell_clone_3--;
-  //   a_column_clone_3--;
-  //   leftmost_cell_3.push([a_column_clone_3, a_cell_clone_3]);
-  // } while (board[a_column_clone_3][a_cell_clone_3]);
-  // let rightmost_cell_3 = []
-  // do {
-  //   if (board[a_column_clone_3][a_cell_clone_3] === false) {
-  //     rightmost_cell_3 = rightmost_cell_3[rightmost_cell_3.length - 1];
-  //     break;
-  //   } else a_cell_clone_3++;
-  //   a_column_clone_3++;
-  //   rightmost_cell_3.push([a_column_clone_3, a_cell_clone_3]);
-  // } while (board[a_column_clone_3][a_cell_clone_3]);
   let [a_column_clone_3, a_cell_clone_3, leftmost_cell_3] = [a_column, a_cell, null];
   do {
     if (board[a_column_clone_3][a_cell_clone_3] !== undefined) leftmost_cell_3 = [a_column_clone_3, a_cell_clone_3];
