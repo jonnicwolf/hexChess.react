@@ -21,6 +21,7 @@ const Row1 = ({
           color={color}
           cellID={pieces[i].position}
           piece={pieces[i].piece.pieceImgPath}
+          highlight={pieces[i].piece.highlight}
           hex_activeCellSetter={activeCellsSet}
           hex_activeCells={activeCellsGet} />
       );

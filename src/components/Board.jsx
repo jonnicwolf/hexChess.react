@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
+import { starting_position } from './Board_obj.jsx';
 import Row1 from './BoardRows/Row1';
 import Row2 from './BoardRows/Row2';
 import Row3 from './BoardRows/Row3';
@@ -8,8 +9,8 @@ import Row4 from './BoardRows/Row4';
 import Row5 from './BoardRows/Row5';
 import Row6 from './BoardRows/Row6';
 
-import { pawn_move } from './pieceMovements';
-import { bishop_move } from './pieceMovements/bishop.js'
+// import { pawn_move } from './pieceMovements';
+import { bishop_move } from '../pieceMovements/bishop.js'
 
 const Board = () => {
   const earthTones = ['#FFA177','#E0BC6E','#949C73'];
@@ -24,6 +25,7 @@ const Board = () => {
   const [activeCells, setActiveCells] = useState([]);
 
   useEffect(() => {
+    if (activeCells.length === 1) bishop_move(activeCells, board)
     if (activeCells.length > 2) setActiveCells([]);
     if (activeCells.length === 2) {
       //fire out which cells are being touched ✅
@@ -48,7 +50,7 @@ const Board = () => {
           // Statements executed when the result of expression matches value2
           break;
         case 'pawn':
-          pawn_move(activeCells,board);
+          // pawn_move(activeCells,board);
           break;
         case 'rook':
           // Statements executed when the result of expression matches value2

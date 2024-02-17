@@ -5,6 +5,7 @@ const Hexagon = ({
   color,
   cellID,
   piece,
+  highlight,
   activeCellsSet,
   activeCellsGet }) => {
 
@@ -33,8 +34,8 @@ const Hexagon = ({
     ctx.moveTo(xPoints[0], yPoints[0]);
     for (let i = 1; i < 6; i++) ctx.lineTo(xPoints[i], yPoints[i]);
     ctx.closePath();
-    ctx.strokeStyle = 'black';
-    ctx.lineWidth = 1;
+    ctx.strokeStyle = highlight ? 'red' : 'black';
+    ctx.lineWidth = highlight ? 2 : 1;
     ctx.fillStyle = isTouched && activeCellsGet.length <= 2 ? '#fae57f' : color;
     ctx.stroke();
     ctx.fill();
