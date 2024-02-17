@@ -92,5 +92,10 @@ export const bishop_move = (activeCells, board) => {
   const f_line_2 = [leftmost_cell_2, ...rightmost_cell_2];
   const f_line_3 = [leftmost_cell_3, ...rightmost_cell_3];
 
-  return [...f_line_1, ...f_line_2, ...f_line_3];
+  const legal_cells = [...f_line_1, ...f_line_2, ...f_line_3];
+  legal_cells.forEach(([column, cell]) => {
+    if (board[column] && board[column][cell]) {
+      board[column][cell].highlight = true;
+    }
+  });
 };
