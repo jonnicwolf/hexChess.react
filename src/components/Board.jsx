@@ -12,27 +12,6 @@ import { pawn_move } from './pieceMovements';
 import { bishop_move } from './pieceMovements/bishop.js'
 
 const Board = () => {
-  const pieces = {
-    black: {
-      bishop: 'src/assets/pieces/black/bishop.png',
-      king: 'src/assets/pieces/black/king.png',
-      knight: 'src/assets/pieces/black/knight.png',
-      queen: 'src/assets/pieces/black/queen.png',
-      pawn: 'src/assets/pieces/black/pawn.png',
-      rook: 'src/assets/pieces/black/rook.png',
-    },
-    white: {
-      bishop: 'src/assets/pieces/white/bishop.png',
-      king:   'src/assets/pieces/white/king.png',
-      knight: 'src/assets/pieces/white/knight.png',
-      queen:  'src/assets/pieces/white/queen.png',
-      pawn:   'src/assets/pieces/white/pawn.png',
-      rook:   'src/assets/pieces/white/rook.png',
-    },
-  };
-  const {black, white} = pieces;
-  
-
   const earthTones = ['#FFA177','#E0BC6E','#949C73'];
   const funkyMoss = ['#44634D','#EC5082','#1e4d3b'];
   const kungFu = ['red', 'dimgrey', '#d1b488'];
