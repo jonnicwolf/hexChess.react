@@ -95,7 +95,7 @@ export const bishop_move = (activeCells, board) => {
   let leftmost_cell_3_clone = [...leftmost_cell_3];
   do {
     if ( board[leftmost_cell_3_clone[0]][leftmost_cell_3_clone[1]] ) {
-      if ( leftmost_cell_3_clone[0] === 5 ) leftmost_cell_3_clone[0]+=2;
+      if ( leftmost_cell_3_clone[0] === 5 ) leftmost_cell_3_clone[0] += 2;
       else if ( leftmost_cell_3_clone[0] > 5 ) {
           leftmost_cell_3_clone[0] += 2;
           leftmost_cell_3_clone[1] --;
