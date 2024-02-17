@@ -74,7 +74,7 @@ export const starting_position = {
     {position: [6,6], piece: {pieceType: null, pieceImgPath: null}, highlight: false},
     {position: [6,7], piece: {pieceType: 'pawn', pieceImgPath: white.pawn}, highlight: false},
     {position: [6,8], piece: {pieceType: null, pieceImgPath: null}, highlight: false},
-    {position: [6,9], piece: {pieceType: 'bishop', pieceImgPath: white.bishop}, highlight: false},
+    {position: [6,9], piece: {pieceType: null, pieceImgPath: null}, highlight: false},
     {position: [6,10], piece: {pieceType: 'bishop', pieceImgPath: white.bishop}, highlight: false},
     {position: [6,11], piece: {pieceType: 'bishop', pieceImgPath: white.bishop}, highlight: false} ],
   7: [
@@ -83,9 +83,9 @@ export const starting_position = {
     {position: [7,3], piece: {pieceType: null, pieceImgPath: null}, highlight: false},
     {position: [7,4], piece: {pieceType: 'pawn', pieceImgPath: black.pawn}, highlight: false},
     {position: [7,5], piece: {pieceType: null, pieceImgPath: null}, highlight: false},
-    {position: [7,6], piece: {pieceType: null, pieceImgPath: null}, highlight: false},
-    {position: [7,7], piece: {pieceType: null, pieceImgPath: null}, highlight: false},
-    {position: [7,8], piece: {pieceType: 'pawn', pieceImgPath: white.pawn}, highlight: false},
+    {position: [7,6], piece: {pieceType: 'bishop', pieceImgPath: white.bishop}, highlight: false},
+    {position: [7,7], piece: {pieceType: 'pawn', pieceImgPath: white.pawn}, highlight: false},
+    {position: [7,8], piece: {pieceType: null, pieceImgPath: null}, highlight: false},
     {position: [7,9], piece: {pieceType: null, pieceImgPath: null}, highlight: false},
     {position: [7,10], piece: {pieceType: 'queen', pieceImgPath: white.queen}, highlight: false} ],
   8: [
