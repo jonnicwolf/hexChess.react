@@ -16,6 +16,9 @@ const Hexagon = ({
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
+    // Clear the canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     // Set the center and radius of the hexagon
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
@@ -30,16 +33,19 @@ const Hexagon = ({
     };
 
     // drawing the hexagon
+    const hex_color = highlight ? 'red' : 'black';
+    const hex_fillStyle = isTouched && activeCellsGet.length <= 2 ? '#fae57f' : color;
+    const hex_lineWidth = highlight ?  4 : 1;
     ctx.beginPath();
     ctx.moveTo(xPoints[0], yPoints[0]);
     for (let i = 1; i < 6; i++) ctx.lineTo(xPoints[i], yPoints[i]);
     ctx.closePath();
-    ctx.strokeStyle = highlight ? 'red' : 'black';
-    ctx.lineWidth = highlight ? 2 : 1;
-    ctx.fillStyle = isTouched && activeCellsGet.length <= 2 ? '#fae57f' : color;
+    ctx.strokeStyle = hex_color;
+    ctx.lineWidth = hex_lineWidth;
+    ctx.fillStyle = hex_fillStyle;
     ctx.stroke();
     ctx.fill();
-  }, [isTouched]);
+  }, [isTouched, highlight]);
 
   function handleClick () {
     setTouch(!isTouched);

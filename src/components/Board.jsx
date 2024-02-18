@@ -25,7 +25,9 @@ const Board = () => {
   const [activeCells, setActiveCells] = useState([]);
 
   useEffect(() => {
-    if (activeCells.length === 1) bishop_move(activeCells, board)
+    if (activeCells.length === 1) {
+      bishop_move(activeCells, board)
+    }
     if (activeCells.length > 2) setActiveCells([]);
     if (activeCells.length === 2) {
       //fire out which cells are being touched ✅
@@ -41,6 +43,7 @@ const Board = () => {
       //once we have a piece/s we can determine if its a move or an attack
       switch (board[b_column][b_cell].pieceType !== null) {
         case 'bishop':
+          console.log('move finder ran')
           bishop_move(activeCells, board);
           break;
         case 'king':
