@@ -27,21 +27,21 @@ const Board = () => {
   useEffect(() => {
     if (activeCells.length === 1) {
       bishop_move(activeCells, setBoard, board)
-      // console.log(board)
     }
     if (activeCells.length > 2) setActiveCells([]);
     if (activeCells.length === 2) {
-      //fire out which cells are being touched ✅
+      // Find out which cells are being touched ✅
       const a_coordinates = activeCells[0]
       const a_cell        = a_coordinates[1]-1
       const a_column      = a_coordinates[0]
 
       const b_coordinates = activeCells[1];
       const b_cell        = b_coordinates[1]-1;
+      console.log(b_cell)
       const b_column      = b_coordinates[0];
-      //figure out what piece if any is present ✅
+      // Find out what piece if any is present ✅
       let a_piece = board[a_column][a_cell].piece.pieceType
-      //once we have a piece/s we can determine if its a move or an attack
+      // Once we have a piece/s we can determine if its a move or an attack
       switch (board[b_column][b_cell].pieceType !== null) {
         case 'bishop':
           console.log('move finder ran')
@@ -68,7 +68,6 @@ const Board = () => {
       };
     };
   },[activeCells, board]);
-  console.log(board['1'], `board['1']`)
 
   return (
     <Container>

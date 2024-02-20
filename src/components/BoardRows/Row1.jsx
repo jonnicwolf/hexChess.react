@@ -13,10 +13,8 @@ const Row1 = ({
   function renderElements(count) {
     let color
     const elements = [];
-    console.log(pieces,'pieces')
     for (let i = 0; i < count; i++) {
       color = colorPalette[i % colorPalette.length];
-      console.log(pieces[i].highlight, 'highlight row 1', pieces[i]);
       elements.push(
         <Hexagon 
           key={`${i}`}
