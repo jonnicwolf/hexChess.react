@@ -13,15 +13,17 @@ const Row1 = ({
   function renderElements(count) {
     let color
     const elements = [];
+    console.log(pieces,'pieces')
     for (let i = 0; i < count; i++) {
       color = colorPalette[i % colorPalette.length];
+      console.log(pieces[i].highlight, 'highlight row 1', pieces[i]);
       elements.push(
         <Hexagon 
           key={`${i}`}
           color={color}
           cellID={pieces[i].position}
           piece={pieces[i].piece.pieceImgPath}
-          highlight={pieces[i].piece.highlight}
+          highlight={pieces[i].highlight}
           hex_activeCellSetter={activeCellsSet}
           hex_activeCells={activeCellsGet} />
       );

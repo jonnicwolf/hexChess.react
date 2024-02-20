@@ -11,6 +11,7 @@ const Hexagon = ({
 
   const [isTouched, setTouch] = useState(false);
   const canvasRef = useRef(null);
+  // console.log(highlight, 'line 14')
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -35,7 +36,7 @@ const Hexagon = ({
     // drawing the hexagon
     const hex_color = highlight ? 'red' : 'black';
     const hex_fillStyle = isTouched && activeCellsGet.length <= 2 ? '#fae57f' : color;
-    const hex_lineWidth = highlight ?  4 : 1;
+    const hex_lineWidth = highlight ?  4 : 0;
     ctx.beginPath();
     ctx.moveTo(xPoints[0], yPoints[0]);
     for (let i = 1; i < 6; i++) ctx.lineTo(xPoints[i], yPoints[i]);

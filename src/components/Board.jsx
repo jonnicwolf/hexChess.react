@@ -26,7 +26,8 @@ const Board = () => {
 
   useEffect(() => {
     if (activeCells.length === 1) {
-      bishop_move(activeCells, board)
+      bishop_move(activeCells, setBoard, board)
+      // console.log(board)
     }
     if (activeCells.length > 2) setActiveCells([]);
     if (activeCells.length === 2) {
@@ -44,7 +45,7 @@ const Board = () => {
       switch (board[b_column][b_cell].pieceType !== null) {
         case 'bishop':
           console.log('move finder ran')
-          bishop_move(activeCells, board);
+          bishop_move(activeCells, setBoard, board);
           break;
         case 'king':
           // Statements executed when the result of expression matches value2
@@ -66,7 +67,8 @@ const Board = () => {
           // Statements executed if none of the cases match the expression
       };
     };
-  },[activeCells]);
+  },[activeCells, board]);
+  console.log(board['1'], `board['1']`)
 
   return (
     <Container>

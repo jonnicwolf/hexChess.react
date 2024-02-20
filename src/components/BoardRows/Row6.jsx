@@ -20,7 +20,7 @@ const Row6 = ({
           color={color}
           cellId={pieces[i].position}
           piece={pieces[i].piece.pieceImgPath}
-          highlight={pieces[i].piece.highlight}
+          highlight={pieces[i].highlight}
           activeCellsSet={activeCellsSet}
           activeCellsGet={activeCellsGet} />
       );
