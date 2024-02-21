@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Hexagon from '../Hexagon';
 
-const Row6 = ({
+const Row6 = React.memo(({
   colorPalette,
   activeCellsSet,
   activeCellsGet,
@@ -33,7 +33,7 @@ const Row6 = ({
       {renderElements(11)}
     </Container>
   )
-};
+});
 
 const Container = styled.div`
   display: flex;

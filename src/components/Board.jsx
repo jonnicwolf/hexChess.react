@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-
 import styled from 'styled-components';
-import { starting_position } from './Board_obj.jsx';
+
 import Row1 from './BoardRows/Row1';
 import Row2 from './BoardRows/Row2';
 import Row3 from './BoardRows/Row3';
@@ -10,6 +9,7 @@ import Row5 from './BoardRows/Row5';
 import Row6 from './BoardRows/Row6';
 
 // import { pawn_move } from './pieceMovements';
+import { starting_position } from './Board_obj.jsx';
 import { bishop_move } from '../pieceMovements/bishop.js'
 
 const Board = () => {
@@ -26,16 +26,9 @@ const Board = () => {
 
   useEffect(() => {
     if (activeCells.length === 1) {
-      // console.log('bishop move ran')
       bishop_move(activeCells, setBoard, board)
-      // console.log(board[activeCells[0]][activeCells[1]], 'current cell')
-      // console.log(board, 'current cell')
-      // console.log(activeCells, 'activeCells')
-      // console.log(activeCells.length, 'activeCells length')
     }
-    // console.log(activeCells, 'activeCells')
-    // console.log(activeCells.length, 'activeCells length')
-    if (activeCells.length > 2) setActiveCells([]);
+    if (activeCells.length > 2 || activeCells.length > 0 && activeCells[0] === activeCells[1]) setActiveCells([]);
     if (activeCells.length === 2) {
       // Find out which cells are being touched ✅
       const a_coordinates = activeCells[0]
@@ -47,30 +40,6 @@ const Board = () => {
       const b_column      = b_coordinates[0];
       // Find out what piece if any is present ✅
       let a_piece = board[a_column][a_cell].piece.pieceType
-      // Once we have a piece/s we can determine if its a move or an attack
-      // switch (board[b_column][b_cell].pieceType !== null) {
-      //   case 'bishop':
-      //     bishop_move(activeCells, setBoard, board);
-      //     break;
-      //   case 'king':
-      //     // Statements executed when the result of expression matches value2
-      //     break;
-      //   case 'knight':
-      //     // Statements executed when the result of expression matches value2
-      //     break;
-      //   case 'pawn':
-      //     // pawn_move(activeCells,board);
-      //     break;
-      //   case 'rook':
-      //     // Statements executed when the result of expression matches value2
-      //     break;
-      //   case 'queen':
-      //     // Statements executed when the result of expression matches value2
-      //     break;
-      //   // You can have any number of case statements
-      //   default:
-      //     // Statements executed if none of the cases match the expression
-      // };
     };
   },[activeCells, board]);
 

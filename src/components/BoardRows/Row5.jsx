@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Hexagon from '../Hexagon';
 
-const Row5 = ({
+const Row5 = React.memo(({
   translatex,
   translatey,
   colorPalette,
@@ -46,7 +46,7 @@ const Row5 = ({
       {renderElements(10)}
     </Container>
   );
-};
+});
 
 const Container = styled.div`
   display: flex;

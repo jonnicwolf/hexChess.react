@@ -14,7 +14,7 @@ const Hexagon = ({
   // console.log(highlight, 'line 14')
 
   // drawing the hexagon
-  function draw_hexagon (isTouched, highlight, color) {
+  function draw_hexagon (highlight, color) {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
@@ -53,17 +53,16 @@ const Hexagon = ({
   }
 
   useEffect(() => {
-    draw_hexagon(isTouched, highlight, color);
+    draw_hexagon(highlight, color);
   }, [isTouched, activeCellsGet, color, highlight]);
 
   function handleClick () {
-    setTouch(!isTouched);
-    if (activeCellsGet.length > 2) setTouch(!isTouched);
+    if (activeCellsGet.length <= 2) setTouch(!isTouched);
     activeCellsSet([...activeCellsGet, cellID]);
   };
 
   return (
-    <Container onClick={()=>handleClick()}>
+    <Container onClick={handleClick}>
       <HexagonCanvas
         ref={canvasRef}
         id="hexagon"
