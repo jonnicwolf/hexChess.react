@@ -12,6 +12,18 @@ const Row5 = ({
   function renderElements(count) {
     let color
     const elements = [];
+    // console.log('1',pieces[3].highlight, 'pieces 3 highlight', pieces[3])
+    // console.log('2','yo')
+    console.log(activeCellsGet, 'activeCells get')
+    console.log(activeCellsGet.length, 'length', typeof activeCellsGet)
+    if (activeCellsGet.length === 1) {
+      // console.log(activeCellsGet[0],'activeCellsget @1')
+      console.log(pieces[activeCellsGet[0][1]-1].highlight, 'bor')
+    }
+    console.log(pieces)
+
+    // if (activeCellsGet.length ===1) console.log('3',activeCellsGet, pieces[activeCellsGet[1]],'activecells')
+
     for (let i = 0; i < count; i++) {
       const colorIndex = (i + 1) % colorPalette.length;
       color = colorPalette[colorIndex];

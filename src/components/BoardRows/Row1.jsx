@@ -13,6 +13,9 @@ const Row1 = ({
   function renderElements(count) {
     let color
     const elements = [];
+    // console.log('1',pieces[3].highlight, 'pieces 3 highlight', pieces[3])
+    // console.log('2','yo')
+    // if (activeCellsGet.length ===1) console.log('3',activeCellsGet, pieces[activeCellsGet[1]],'activecells')
     for (let i = 0; i < count; i++) {
       color = colorPalette[i % colorPalette.length];
       elements.push(

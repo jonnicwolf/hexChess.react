@@ -120,7 +120,7 @@ export const bishop_move = (activeCells, boardSetter, board) => {
   // Highlight the legal cells
   legal_cells.forEach( ([column, cell]) => {
     if ( board[column] && board[column][cell-1] ) {
-      board[column][cell-1].highlight = true;
+      board[column][cell-1].highlight = !board[column][cell-1].highlight;
       boardSetter(board);
     };
   });
