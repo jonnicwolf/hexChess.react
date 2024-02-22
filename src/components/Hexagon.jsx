@@ -12,7 +12,7 @@ const Hexagon = ({
   const [isTouched, setTouch] = useState(false);
   const canvasRef = useRef(null);
 
-  // drawing the hexagon
+  // Drawing the hexagon
   function draw_hexagon (highlight, color) {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");

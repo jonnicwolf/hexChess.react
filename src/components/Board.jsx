@@ -20,6 +20,14 @@ const Board = () => {
   const [board, setBoard] = useState(starting_position);
   const [activeCells, setActiveCells] = useState([]);
 
+  async function gather_props () {
+    try {
+       
+    } catch (error) {
+      
+    }
+  }
+
   useEffect(() => {
     if (activeCells.length === 1) {
       bishop_move(activeCells, setBoard, board)
