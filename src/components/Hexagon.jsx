@@ -1,17 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
-const Hexagon = ({ 
+const Hexagon = ({
   color,
   cellID,
   piece,
   highlight,
-  activeCellsSet,
-  activeCellsGet }) => {
+  hex_activeCellSetter,
+  hex_activeCells }) => {
 
   const [isTouched, setTouch] = useState(false);
   const canvasRef = useRef(null);
-  // console.log(highlight, 'line 14')
 
   // drawing the hexagon
   function draw_hexagon (highlight, color) {
@@ -37,7 +36,7 @@ const Hexagon = ({
     // Run drawing logic
     const hex_color = highlight ? 'red' : 'black';
     const hex_fillStyle = 
-      isTouched && activeCellsGet.length <= 2
+      isTouched && hex_activeCells.length <= 2
         ? '#fae57f'
         : highlight ? 'red' : color;
     const hex_lineWidth = 1;
@@ -50,15 +49,15 @@ const Hexagon = ({
     ctx.fillStyle = hex_fillStyle;
     ctx.stroke();
     ctx.fill();
-  }
+  };
 
   useEffect(() => {
     draw_hexagon(highlight, color);
-  }, [isTouched, activeCellsGet, color, highlight]);
+  }, [isTouched, hex_activeCells, color, highlight]);
 
   function handleClick () {
-    if (activeCellsGet.length <= 2) setTouch(!isTouched);
-    activeCellsSet([...activeCellsGet, cellID]);
+    if (hex_activeCells.length <= 2) setTouch(!isTouched);
+    hex_activeCellSetter([...hex_activeCells, cellID]);
   };
 
   return (

@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import Row1 from './BoardRows/Row1';
-import Row2 from './BoardRows/Row2';
-import Row3 from './BoardRows/Row3';
-import Row4 from './BoardRows/Row4';
-import Row5 from './BoardRows/Row5';
-import Row6 from './BoardRows/Row6';
+import Row from './BoardRows/Row';
+import MiddleRow from './BoardRows/MiddleRow';
 
 // import { pawn_move } from './pieceMovements';
 import { starting_position } from './Board_obj.jsx';
@@ -30,7 +26,7 @@ const Board = () => {
     }
     if (activeCells.length > 2 || activeCells.length > 0 && activeCells[0] === activeCells[1]) setActiveCells([]);
     if (activeCells.length === 2) {
-      // Find out which cells are being touched ✅
+      // Find out which cells are being touched
       const a_coordinates = activeCells[0]
       const a_cell        = a_coordinates[1]-1
       const a_column      = a_coordinates[0]
@@ -38,82 +34,84 @@ const Board = () => {
       const b_coordinates = activeCells[1];
       const b_cell        = b_coordinates[1]-1;
       const b_column      = b_coordinates[0];
-      // Find out what piece if any is present ✅
+      // Find out what piece if any is present
       let a_piece = board[a_column][a_cell].piece.pieceType
     };
   },[activeCells, board]);
 
+  console.log(activeCells, 'board')
+
   return (
     <Container>
-      <Row1
+      <Row
         translatex={130}
         translatey={220}
         colorPalette={currentPalette}
         activeCellsSet={setActiveCells}
         activeCellsGet={activeCells}
         pieces={board['1']}/>
-      <Row2
+      <Row
         translatex={104}
         translatey={176}
         colorPalette={currentPalette}
         activeCellsSet={setActiveCells}
         activeCellsGet={activeCells}
         pieces={board['2']}/>
-      <Row3
+      <Row
         translatex={78}
         translatey={132}
         colorPalette={currentPalette}
         activeCellsSet={setActiveCells}
         activeCellsGet={activeCells}
         pieces={board['3']}/>
-      <Row4 
+      <Row 
         translatex={52}
         translatey={88}
         colorPalette={currentPalette}
         activeCellsSet={setActiveCells}
         activeCellsGet={activeCells}
         pieces={board['4']}/>
-      <Row5 
+      <Row 
         translatex={26}
         translatey={44}
         colorPalette={currentPalette}
         activeCellsSet={setActiveCells}
         activeCellsGet={activeCells}
         pieces={board['5']}/>
-      <Row6
+      <MiddleRow
         colorPalette={currentPalette}
         activeCellsSet={setActiveCells}
         activeCellsGet={activeCells}
         pieces={board['6']}/>
-      <Row5
+      <Row
         translatex={-26}
         translatey={44}
         colorPalette={currentPalette}
         activeCellsSet={setActiveCells}
         activeCellsGet={activeCells}
         pieces={board['7']}/>
-      <Row4
+      <Row
         translatex={-52}
         translatey={88}
         colorPalette={currentPalette}
         activeCellsSet={setActiveCells}
         activeCellsGet={activeCells}
         pieces={board['8']}/>
-      <Row3
+      <Row
         translatex={-78}
         translatey={132}
         colorPalette={currentPalette}
         activeCellsSet={setActiveCells}
         activeCellsGet={activeCells}
         pieces={board['9']}/>
-      <Row2
+      <Row
         translatex={-104}
         translatey={176}
         colorPalette={currentPalette}
         activeCellsSet={setActiveCells}
         activeCellsGet={activeCells}
         pieces={board['10']}/>
-      <Row1
+      <Row
         translatex={-130}
         translatey={220}
         colorPalette={currentPalette}

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Hexagon from '../Hexagon';
 
-const Row1 = React.memo(({ 
+const Row1 = React.memo(({
   translatex,
   translatey,
   colorPalette,
@@ -10,16 +10,23 @@ const Row1 = React.memo(({
   activeCellsGet,
   pieces }) => {
 
-  function renderElements(count) {
+  function render_elements(count) {
     let color
     const elements = [];
-    // console.log('1',pieces[3].highlight, 'pieces 3 highlight', pieces[3])
-    // console.log('2','yo')
-    // if (activeCellsGet.length ===1) console.log('3',activeCellsGet, pieces[activeCellsGet[1]],'activecells')
+
+    function calc_count (count) {
+      let counter = count;
+      if (counter > 8) {
+        counter = counter % 3;
+        return counter;
+      } else return (counter % 6);
+    };
+
+    const counter = calc_count(count);
     for (let i = 0; i < count; i++) {
-      color = colorPalette[i % colorPalette.length];
+      color = colorPalette[(i + counter) % colorPalette.length];
       elements.push(
-        <Hexagon 
+        <Hexagon
           key={`${i}`}
           color={color}
           cellID={pieces[i].position}
@@ -34,7 +41,7 @@ const Row1 = React.memo(({
 
   return (
     <Container translatex={translatex} translatey={translatey}>
-      {renderElements(6)}
+      {render_elements(pieces.length)}
     </Container>
   )
 });
