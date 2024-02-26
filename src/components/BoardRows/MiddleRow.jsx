@@ -2,44 +2,43 @@ import React from 'react';
 import styled from 'styled-components';
 import Hexagon from '../Hexagon';
 
-const Row1 = ({ 
-  translatex,
-  translatey,
+const MiddleRow = React.memo(({
   colorPalette,
   activeCellsSet,
   activeCellsGet,
   pieces }) => {
 
   function renderElements(count) {
-    let color
+    let color;
     const elements = [];
     for (let i = 0; i < count; i++) {
-      color = colorPalette[i % colorPalette.length];
+      const colorIndex = (i + 2) % colorPalette.length;
+      color = colorPalette[colorIndex];
       elements.push(
-        <Hexagon 
+        <Hexagon
           key={`${i}`}
           color={color}
-          cellID={pieces[i].position}
+          cellId={pieces[i].position}
           piece={pieces[i].piece.pieceImgPath}
-          hex_activeCellSetter={activeCellsSet}
-          hex_activeCells={activeCellsGet} />
+          highlight={pieces[i].highlight}
+          activeCellsSet={activeCellsSet}
+          activeCellsGet={activeCellsGet} />
       );
     };
     return elements;
   };
 
   return (
-    <Container translatex={translatex} translatey={translatey}>
-      {renderElements(6)}
+    <Container>
+      {renderElements(11)}
     </Container>
   )
-};
+});
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100px;
-  transform: translate(${props => props.translatex}px, ${props => props.translatey}px);
 `;
 
-export default Row1;
+export default MiddleRow;

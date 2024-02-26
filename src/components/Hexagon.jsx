@@ -1,19 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
-const Hexagon = ({ 
+const Hexagon = ({
   color,
   cellID,
   piece,
-  activeCellsSet,
-  activeCellsGet }) => {
+  highlight,
+  hex_activeCellSetter,
+  hex_activeCells }) => {
 
   const [isTouched, setTouch] = useState(false);
   const canvasRef = useRef(null);
 
-  useEffect(() => {
+  // Drawing the hexagon
+  function draw_hexagon (highlight, color) {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
+
+    // Clear the canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Set the center and radius of the hexagon
     const centerX = canvas.width / 2;
@@ -28,26 +33,35 @@ const Hexagon = ({
       yPoints.push(centerY + radius * Math.sin((2 * Math.PI * i) / 6));
     };
 
-    // drawing the hexagon
+    // Run drawing logic
+    const hex_color = highlight ? 'red' : 'black';
+    const hex_fillStyle = 
+      isTouched && hex_activeCells.length <= 2
+        ? '#fae57f'
+        : highlight ? 'red' : color;
+    const hex_lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(xPoints[0], yPoints[0]);
     for (let i = 1; i < 6; i++) ctx.lineTo(xPoints[i], yPoints[i]);
     ctx.closePath();
-    ctx.strokeStyle = 'black';
-    ctx.lineWidth = 1;
-    ctx.fillStyle = isTouched && activeCellsGet.length <= 2 ? '#fae57f' : color;
+    ctx.strokeStyle = hex_color;
+    ctx.lineWidth = hex_lineWidth;
+    ctx.fillStyle = hex_fillStyle;
     ctx.stroke();
     ctx.fill();
-  }, [isTouched]);
+  };
+
+  useEffect(() => {
+    draw_hexagon(highlight, color);
+  }, [isTouched, hex_activeCells, color, highlight]);
 
   function handleClick () {
-    setTouch(!isTouched);
-    if (activeCellsGet.length > 2) setTouch(!isTouched);
-    activeCellsSet([...activeCellsGet, cellID]);
+    if (hex_activeCells.length <= 2) setTouch(!isTouched);
+    hex_activeCellSetter([...hex_activeCells, cellID]);
   };
 
   return (
-    <Container onClick={()=>handleClick()}>
+    <Container onClick={handleClick}>
       <HexagonCanvas
         ref={canvasRef}
         id="hexagon"
