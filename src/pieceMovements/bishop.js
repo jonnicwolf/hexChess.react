@@ -20,6 +20,7 @@ export const bishop_move = (activeCells, boardSetter, board) => {
       leftmost_cell_1 = leftmost_cell_1[leftmost_cell_1.length-1];
       break;
     };
+
     // Calculate the new cell coordinates based on the current cell and direction
     if (a_column_clone_1 <= 6) a_cell_clone_1 -= 2;
     else a_cell_clone_1--;
@@ -36,6 +37,7 @@ export const bishop_move = (activeCells, boardSetter, board) => {
       rightmost_cell_1 = rightmost_cell_1[rightmost_cell_1.length - 1];
       break;
     };
+
     // Calculate the new cell coordinates based on the current cell and direction
     if (a_column_clone_1 < 6) a_cell_clone_1 += 2;
     else a_cell_clone_1++;
@@ -50,6 +52,7 @@ export const bishop_move = (activeCells, boardSetter, board) => {
   let [a_column_clone_2,a_cell_clone_2,leftmost_cell_2] = [a_column, a_cell, null];
   do {
     if (board[a_column_clone_2][a_cell_clone_2]) {leftmost_cell_2 = [a_column_clone_2, a_cell_clone_2] };
+
     // Calculate the new cell coordinates based on the current cell and direction
     a_column_clone_2--;
 
@@ -69,6 +72,7 @@ export const bishop_move = (activeCells, boardSetter, board) => {
         leftmost_cell_2_clone[0] ++;
         leftmost_cell_2_clone[1] -= 2;
       };
+
       // Add the new cell coordinates to the rightmost_cell_2 array
       rightmost_cell_2.push( [leftmost_cell_2_clone[0],leftmost_cell_2_clone[1]] );
     };
@@ -81,6 +85,7 @@ export const bishop_move = (activeCells, boardSetter, board) => {
 
   do {
     if ( board[a_column_clone_3][a_cell_clone_3] !== undefined ) leftmost_cell_3 = [a_column_clone_3, a_cell_clone_3];
+
     // Calculate the new cell coordinates based on the current cell and direction
     if(a_column_clone_3 === 7) a_column_clone_3-=2;
     else {
@@ -104,6 +109,7 @@ export const bishop_move = (activeCells, boardSetter, board) => {
           leftmost_cell_3_clone[1] ++;
       };
     };
+
     // Add the new cell coordinates to the rightmost_cell_3 array
     rightmost_cell_3.push( [...leftmost_cell_3_clone] );
     if ( leftmost_cell_3_clone[0] > 11 ) break;
