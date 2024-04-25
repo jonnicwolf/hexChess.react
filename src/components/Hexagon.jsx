@@ -80,6 +80,14 @@ const Container = styled.div`
   position: relative;
   align-items: center;
   justify-content: center;
+  clip-path: polygon(
+    25% 0%,
+    75% 0%,
+    100% 50%,
+    75% 100%,
+    25% 100%,
+    0% 50%
+  );
 `;
 const Img = styled.img`
   height: 50px;
