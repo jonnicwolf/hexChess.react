@@ -15,24 +15,18 @@ const Board = () => {
   const leanne = ['#fc03be', '#fc8c03', 'purple'];
   const classic = ['lightGrey', 'darkGrey', 'slateGrey'];
   const smileOrange = ['#fc8e08','#9fa19f','#8a5413'];
-  const currentPalette = classic;
+  const currentPalette = earthTones;
 
   const [board, setBoard] = useState(starting_position);
   const [activeCells, setActiveCells] = useState([]);
-
-  async function gather_props () {
-    try {
-       
-    } catch (error) {
-      
-    }
-  }
 
   useEffect(() => {
     if (activeCells.length === 1) {
       bishop_move(activeCells, setBoard, board)
     }
-    if (activeCells.length > 2 || activeCells.length > 0 && activeCells[0] === activeCells[1]) setActiveCells([]);
+    if (activeCells.length > 2) setActiveCells([]);
+    else if (activeCells.length > 0 && activeCells[0] === activeCells[1]) setActiveCells([]);
+
     if (activeCells.length === 2) {
       // Find out which cells are being touched
       const a_coordinates = activeCells[0]
