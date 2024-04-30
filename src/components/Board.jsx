@@ -15,33 +15,29 @@ const Board = () => {
   const leanne = ['#fc03be', '#fc8c03', 'purple'];
   const classic = ['lightGrey', 'darkGrey', 'slateGrey'];
   const smileOrange = ['#fc8e08','#9fa19f','#8a5413'];
-  const currentPalette = earthTones;
+  const currentPalette = kungFu;
 
   const [board, setBoard] = useState(starting_position);
   const [activeCells, setActiveCells] = useState([]);
 
   useEffect(() => {
-    if (activeCells.length === 1) {
-      bishop_move(activeCells, setBoard, board)
-    }
-    if (activeCells.length > 2) setActiveCells([]);
-    else if (activeCells.length > 0 && activeCells[0] === activeCells[1]) setActiveCells([]);
+    if (activeCells.length === 1) bishop_move(activeCells, setBoard, board)
+    // else if (activeCells.length > 0 && activeCells[0] === activeCells[1]) setActiveCells([])
+    // else if (activeCells.length === 2) {
+    //   // Find out which cells are being touched
+    //   const a_coordinates = activeCells[0];
+    //   const a_cell        = a_coordinates[1]-1;
+    //   const a_column      = a_coordinates[0];
 
-    if (activeCells.length === 2) {
-      // Find out which cells are being touched
-      const a_coordinates = activeCells[0]
-      const a_cell        = a_coordinates[1]-1
-      const a_column      = a_coordinates[0]
+    //   const b_coordinates = activeCells[1];
+    //   const b_cell        = b_coordinates[1]-1;
+    //   const b_column      = b_coordinates[0];
 
-      const b_coordinates = activeCells[1];
-      const b_cell        = b_coordinates[1]-1;
-      const b_column      = b_coordinates[0];
-      // Find out what piece if any is present
-      let a_piece = board[a_column][a_cell].piece.pieceType
-    };
+    //   // Find out what piece if any is present
+    //   let a_piece = board[a_column][a_cell].piece.pieceType;
+    // }
+    else if (activeCells.length > 2) setActiveCells([]);
   },[activeCells, board]);
-
-  console.log(activeCells, 'board')
 
   return (
     <Container>
@@ -125,9 +121,10 @@ const Board = () => {
 };
 
 const Container = styled.div`
-  background-color: white;
+  background-color: black;
   display: flex;
   justify-content: center;
+  height: 200vh;
 `;
 
 export default Board;

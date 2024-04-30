@@ -56,7 +56,8 @@ const Hexagon = ({
   }, [isTouched, hex_activeCells, color, highlight]);
 
   function handleClick () {
-    if (hex_activeCells.length <= 2) setTouch(!isTouched);
+    // if (hex_activeCells.length <= 2)
+    setTouch(!isTouched);
     hex_activeCellSetter([...hex_activeCells, cellID]);
   };
 
