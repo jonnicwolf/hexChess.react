@@ -8,35 +8,34 @@
 export const bishop_move = (activeCells, boardSetter, board) => {
   // Extract the current position of the bishop piece
   const a_coordinates = activeCells[0];
-  const a_cell        = a_coordinates[1]-1;
+  const a_cell        = a_coordinates[1];
   const a_column      = a_coordinates[0];
 
   function find_line_90() {
     let [column, cell, legal_cells, leftmost_cell] = [a_column, a_cell, [], []];
-    
-    // do {
-    //   const is_valid_cell = board[column] && board[column][cell];
-    //   if (!is_valid_cell) {
-    //     leftmost_cell.pop();
-    //     leftmost_cell = leftmost_cell[leftmost_cell.length-1]
-    //     break
-    //   }; // Exit the loop if cell is invalid
+
+    do {
+      const is_valid_cell = board[column] && board[column][cell];
+      if (!is_valid_cell) {
+        leftmost_cell.pop();
+        leftmost_cell = leftmost_cell[leftmost_cell.length-1];
+        break
+      }; // Exit the loop if cell is invalid
   
-    //   if (column === 5 || column === 7) {
-    //     column -= 2;
-    //     leftmost_cell.push([column, cell]);
-    //     continue;
-    //   } else {
-    //     column -= 2;
-    //     cell--;
-    //     leftmost_cell.push([column, cell]);
-    //   }
-    // } while (true); // Run the loop until break
-    // console.log(leftmost_cell)
-    // legal_cells.push(leftmost_cell)
-    column = 1
-    cell = 4
-    legal_cells = [[column,cell]];
+      if (column === 7) {
+        column -= 2;
+        leftmost_cell.push([column, cell]);
+      } else {
+        column -= 2;
+        cell--;
+        leftmost_cell.push([column, cell]);
+      }
+    } while (true); // Run the loop until break
+
+    legal_cells.push(leftmost_cell);
+    column = leftmost_cell[0];
+    cell = leftmost_cell[1];
+
     do {
       const is_valid_cell = board[column] && board[column][cell];
       if (!is_valid_cell || column === 11) break;
@@ -61,7 +60,6 @@ export const bishop_move = (activeCells, boardSetter, board) => {
         };
       };
     } while (true);
-    console.log(legal_cells)
     return legal_cells;
   };
 

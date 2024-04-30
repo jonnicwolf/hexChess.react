@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Hexagon from '../Hexagon';
 
-const MiddleRow = React.memo(({
+const MiddleRow = ({
   colorPalette,
   activeCellsSet,
   activeCellsGet,
@@ -11,6 +11,7 @@ const MiddleRow = React.memo(({
   function renderElements(count) {
     let color;
     const elements = [];
+
     for (let i = 0; i < count; i++) {
       const colorIndex = (i + 2) % colorPalette.length;
       color = colorPalette[colorIndex];
@@ -21,8 +22,8 @@ const MiddleRow = React.memo(({
           cellId={pieces[i].position}
           piece={pieces[i].piece.pieceImgPath}
           highlight={pieces[i].highlight}
-          activeCellsSet={activeCellsSet}
-          activeCellsGet={activeCellsGet} />
+          hex_activeCellSetter={activeCellsSet}
+          hex_activeCells={activeCellsGet} />
       );
     };
     return elements;
@@ -33,7 +34,7 @@ const MiddleRow = React.memo(({
       {renderElements(11)}
     </Container>
   )
-});
+};
 
 const Container = styled.div`
   display: flex;

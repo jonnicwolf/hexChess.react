@@ -22,7 +22,8 @@ const Row1 = React.memo(({
       } else return (counter % 6);
     };
 
-    const counter = calc_count(count);
+    const counter = calc_count(count); // The next color in the pattern to be rendered
+
     for (let i = 0; i < count; i++) {
       color = colorPalette[(i + counter) % colorPalette.length];
       elements.push(
