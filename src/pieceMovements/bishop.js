@@ -8,120 +8,261 @@
 export const bishop_move = (activeCells, boardSetter, board) => {
   // Extract the current position of the bishop piece
   const a_coordinates = activeCells[0];
-  const a_cell        = a_coordinates[1];
   const a_column      = a_coordinates[0];
+  const a_cell        = a_coordinates[1];
+  const board_length = Object.keys(board).length
 
-  // F-LINE 1
-  // Initialize variables for the first diagonal line of cells
-  let [a_column_clone_1, a_cell_clone_1, leftmost_cell_1] = [a_column, a_cell, []];
-  // Loop until the leftmost cell is out of the board or is empty
-  do {
-    if (a_column_clone_1 <= 1 || a_cell_clone_1 <= 1) {
-      leftmost_cell_1 = leftmost_cell_1[leftmost_cell_1.length-1];
-      break;
-    };
-    // Calculate the new cell coordinates based on the current cell and direction
-    if (a_column_clone_1 <= 6) a_cell_clone_1 -= 2;
-    else a_cell_clone_1--;
+  function find_line_90() {
+    let [column, cell, legal_cells] = [a_column, a_cell, []];
 
-    a_column_clone_1--;
-    // Add the new cell coordinates to the leftmost_cell_1 array
-    leftmost_cell_1.push([a_column_clone_1, a_cell_clone_1]);
-  } while (board[a_column_clone_1][a_cell_clone_1]);
-
-  // Initialize variables for the rightmost cell on the first diagonal line
-  let rightmost_cell_1 = [];
-  do {
-    if (board[a_column_clone_1][a_cell_clone_1] === false) {
-      rightmost_cell_1 = rightmost_cell_1[rightmost_cell_1.length - 1];
-      break;
-    };
-    // Calculate the new cell coordinates based on the current cell and direction
-    if (a_column_clone_1 < 6) a_cell_clone_1 += 2;
-    else a_cell_clone_1++;
-
-    a_column_clone_1++;
-    // Add the new cell coordinates to the rightmost_cell_1 array
-    rightmost_cell_1.push([a_column_clone_1, a_cell_clone_1]);
-  } while (board[a_column_clone_1][a_cell_clone_1]);
-
-  // F-LINE 2
-  // Initialize variables for the second diagonal line of cells
-  let [a_column_clone_2,a_cell_clone_2,leftmost_cell_2] = [a_column, a_cell, null];
-  do {
-    if (board[a_column_clone_2][a_cell_clone_2]) {leftmost_cell_2 = [a_column_clone_2, a_cell_clone_2] };
-    // Calculate the new cell coordinates based on the current cell and direction
-    a_column_clone_2--;
-
-    if (a_column_clone_2 < 6) a_cell_clone_2++;
-    else a_cell_clone_2 += 2;
-  } while (board[a_column_clone_2][a_cell_clone_2]);
-
-  // Initialize variables for the rightmost cell on the second diagonal line
-  let rightmost_cell_2 = [];
-  let leftmost_cell_2_clone = [...leftmost_cell_2];
-  do {
-    if ( board[leftmost_cell_2_clone[0]][leftmost_cell_2_clone[1]] ) {
-      if ( leftmost_cell_2_clone[0] < 6 ) {
-        leftmost_cell_2_clone[0] ++;
-        leftmost_cell_2_clone[1] --;
-      } else {
-        leftmost_cell_2_clone[0] ++;
-        leftmost_cell_2_clone[1] -= 2;
+    do { // Find legal cells left of active cell
+      if (column % 2 === 0){
+        if (column > 6) {
+          column -= 2;
+          cell++;
+          legal_cells.push([column, cell]);
+        }
+        else {
+          column -= 2;
+          cell--;
+          legal_cells.push([column, cell]);
+        }
+      }
+      else {
+        if (column === 7) {
+          column -= 2;
+          legal_cells.push([column, cell]);
+        }
+        if (column !== 7 && column > 5) {
+          column -= 2;
+          cell++;
+          legal_cells.push([column, cell]);
+        }
+        else {
+          column -= 2;
+          cell--;
+          legal_cells.push([column, cell]);
+        };
       };
-      // Add the new cell coordinates to the rightmost_cell_2 array
-      rightmost_cell_2.push( [leftmost_cell_2_clone[0],leftmost_cell_2_clone[1]] );
-    };
-    if ( leftmost_cell_2_clone[0] >= 11 || leftmost_cell_2_clone[1] <= 2 ) break;
-  } while ( board[leftmost_cell_2_clone[0]][leftmost_cell_2_clone[1]] );
+      if (legal_cells[legal_cells.length-1][0] <= 1) break;
+    } while(true);
 
-  // F-LINE 3
-  // Initialize variables for the third diagonal line of cells
-  let [a_column_clone_3, a_cell_clone_3, leftmost_cell_3] = [a_column, a_cell, null];
+    column = a_column;
+    cell = a_cell;
+    legal_cells.push([column, cell])
 
-  do {
-    if ( board[a_column_clone_3][a_cell_clone_3] !== undefined ) leftmost_cell_3 = [a_column_clone_3, a_cell_clone_3];
-    // Calculate the new cell coordinates based on the current cell and direction
-    if(a_column_clone_3 === 7) a_column_clone_3-=2;
-    else {
-      a_column_clone_3 -= 2;
-      a_cell_clone_3 --;
-    };
-    if (a_column_clone_3 < 1) break;
-  } while ( board[a_column_clone_3][a_cell_clone_3] !== true );
+    do { // Find legal cells right of active cell
+      if (column % 2 === 0) {
+        if (column > 6) {
+          column += 2
+          cell--
+          legal_cells.push([column, cell])
+        }
+        else {
+          column += 2
+          cell++
+          legal_cells.push([column, cell])
+        }
+        if (legal_cells[legal_cells.length-1][0] >= board_length) break;
+      }
+      else {
+        if (column === 7 && column !== a_column) {
+          console.log('1: ',column, cell)
+          column += 2
+          legal_cells.push([column, cell])
+        }
+        // else if (column === 7 && legal_cells.includes([5,6]) && column !== a_column) {
+        //   console.log('just added')
+        //   column += 2
+        //   legal_cells.push([column, cell])
+        // }
+        else if (column > 6 && column !== 7) {
+          console.log('2nd: ', column, cell)
+          column += 2
+          cell--
+          console.log(column ,cell)
+          legal_cells.push([column, cell])
+        }
+        else {
+          console.log('3rd: ', column, cell)
+          column += 2
+          cell++
+          legal_cells.push([column, cell])
+        }
+        if (legal_cells[legal_cells.length-1][0] >= board_length) break;
+      }
+    } while (true);
 
-  // Initialize variables for the rightmost cell on the third diagonal line
-  let rightmost_cell_3 = [];
-  let leftmost_cell_3_clone = [...leftmost_cell_3];
-  do {
-    if ( board[leftmost_cell_3_clone[0]][leftmost_cell_3_clone[1]] ) {
-      if ( leftmost_cell_3_clone[0] === 5 ) leftmost_cell_3_clone[0] += 2;
-      else if ( leftmost_cell_3_clone[0] > 5 ) {
-          leftmost_cell_3_clone[0] += 2;
-          leftmost_cell_3_clone[1] --;
-      } else {
-          leftmost_cell_3_clone[0] += 2;
-          leftmost_cell_3_clone[1] ++;
-      };
-    };
-    // Add the new cell coordinates to the rightmost_cell_3 array
-    rightmost_cell_3.push( [...leftmost_cell_3_clone] );
-    if ( leftmost_cell_3_clone[0] > 11 ) break;
-  } while ( board[leftmost_cell_3_clone[0]][leftmost_cell_3_clone[1]] );
+    legal_cells = legal_cells.filter(cell => cell[0] <= 11 && cell[0] >= 1)
+    console.log(legal_cells)
+    return legal_cells;
+  }
 
-  // Combine the leftmost and rightmost cells of each diagonal line
-  const f_line_1 = [leftmost_cell_1, ...rightmost_cell_1];
-  const f_line_2 = [leftmost_cell_2, ...rightmost_cell_2];
-  const f_line_3 = [leftmost_cell_3, ...rightmost_cell_3];
 
-  // Create an array of all legal cells
-  const legal_cells = [...f_line_1, ...f_line_2, ...f_line_3];
 
-  // Highlight the legal cells
-  legal_cells.forEach( ([column, cell]) => {
-    if ( board[column] && board[column][cell-1] ) {
-      board[column][cell-1].highlight = !board[column][cell-1].highlight;
-      boardSetter(board);
-    };
-  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // do {
+    //   const is_valid_cell = board[column] && board[column][cell];
+    //   if (!is_valid_cell) {
+    //     leftmost_cell.pop();
+    //     leftmost_cell = leftmost_cell[leftmost_cell.length-1];
+    //     break
+    //   }; // Exit the loop if cell is invalid
+
+
+    //   break
+    // } while (true); // Run the loop until break
+
+    // legal_cells.push(leftmost_cell);
+    // column = leftmost_cell[0];
+    // cell = leftmost_cell[1];
+
+    // do {
+    //   const is_valid_cell = board[column] && board[column][cell];
+    //   if (!is_valid_cell || column === 11) {
+    //     legal_cells.pop()
+    //     break
+    //   }
+
+    //   column += 2;
+    //   if (column % 2 === 0) {
+    //     if (column > 6) {
+    //       cell--;
+    //       legal_cells.push([column, cell]);
+    //     }
+    //     else {
+    //       cell++;
+    //       legal_cells.push([column, cell]);
+    //     };
+    //   } else {
+    //     if (column === 7) legal_cells.push([column,cell])
+    //     else if (column > 6) {
+    //       cell--;
+    //       legal_cells.push([column, cell]);
+    //     } else {
+    //       cell++
+    //       legal_cells.push([column,cell]);
+    //     };
+    //   };
+    // } while (true);
+    // return legal_cells;
+  // };
+
+  console.log(find_line_90());
+
+
+  // function find_line_90 () {
+  //   let [column, cell, legal_cells, leftmost_cell] = [a_column, a_cell, [], null];
+  //   const is_valid_cell = board[column][cell];
+  //   console.log(is_valid_cell);
+    
+  //   do {
+  //     if ( column === 5 || column === 7) {
+  //       console.log('first if ran')
+  //       column -= 2;
+  //       leftmost_cell = [column, cell];
+  //       console.log(leftmost_cell)
+  //       console.log(is_valid_cell)
+  //       continue
+  //     } else {
+  //       column -= 2;
+  //       cell--;
+  //       leftmost_cell = [column, cell];
+  //     }
+  //     console.log(is_valid_cell);
+  //   } while (is_valid_cell);
+
+  //   legal_cells.push(leftmost_cell);
+
+  //   do {
+  //     column+=2;
+  //     cell++;
+  //     legal_cells.push( [column, cell] );
+  //   } while (is_valid_cell);    
+  //   return legal_cells;
+  
+
+  function find_line_330 () {
+    let [column, cell, legal_cells, leftmost_cell] = [a_column, a_cell, [], null];
+    const is_valid_cell = board[column][cell];
+    do {
+      column--;
+      if ( column < 6 ) cell-=2;
+      else cell--;
+      leftmost_cell = [column, cell];
+    } while (is_valid_cell);
+
+    legal_cells.push(leftmost_cell);
+
+    do {
+      column++;
+      if ( column < 6 ) cell += 2;
+      else cell++;
+      legal_cells.push( [column, cell] );
+    } while (is_valid_cell);
+    console.log(legal_cells);
+    return legal_cells;
+  };
+
+  function find_line_30 () {
+    let [column, cell, legal_cells, leftmost_cell] = [a_column, a_cell, [], null];
+    const is_valid_cell = board[column][cell];
+    do {
+      column--;
+      if ( column > 6 ) cell += 2;
+      else cell++;
+      leftmost_cell = [column, cell];
+    } while (is_valid_cell);
+
+    legal_cells.push(leftmost_cell);
+
+    do {
+      column++;
+      if ( column > 6 ) cell -= 2;
+      else cell--;
+      legal_cells.push([column, cell]);
+    } while (is_valid_cell);
+    return legal_cells;
+  };
+
+  // const line_90 = find_line_90();
+  // const line_330 = find_line_330();
+  // const line_30 = find_line_30();
+
+  // const valid_cells = [
+    // ...line_30,
+    // ...line_330,
+    //...line_90
+  //];
+  // valid_cells.forEach( ([column, cell]) => {
+  //   console.log(`column, ${column}, cell, ${cell}`)
+  //   if ( board[column] && board[column][cell-1] ) {
+  //     board[column][cell-1].highlight = !board[column][cell-1].highlight;
+  //     boardSetter(board);
+  //   };
+  // });
 };
+
+
+
+
